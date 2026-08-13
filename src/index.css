@@ -1,0 +1,218 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+:root {
+  --font-sans: "Poppins", ui-sans-serif, system-ui, sans-serif;
+
+  --color-green-50: #f4f4f4;
+
+.ai-assistant-fab-hidden {
+  transform: translateY(0) scale(0.92);
+  opacity: 0;
+}
+
+.ai-assistant-fab-visible {
+  transform: translateY(calc(100vh - 7.5rem));
+  opacity: 1;
+  transition: transform 2s cubic-bezier(.16,.84,.44,1), opacity 400ms ease-in;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ai-assistant-fab-visible,
+  .ai-assistant-fab-hidden {
+    transition: none !important;
+    transform: none !important;
+  }
+}
+  --color-red-50: #fff0ed;
+  --color-red-100: #ffd8d1;
+  --color-red-500: #dc5a42;
+  --color-red-600: #bd412d;
+  --color-red-700: #913120;
+
+  --color-gray-50: #f8faf7;
+  --color-gray-100: #eef2ea;
+  --color-gray-200: #dde5d7;
+  --color-gray-300: #c5d0bd;
+  --color-gray-400: #93a08b;
+  --color-gray-500: #6c7866;
+  --color-gray-600: #4f5b49;
+  --color-gray-700: #394236;
+  --color-gray-800: #222b22;
+  --color-gray-900: #141b15;
+}
+
+:root {
+  color-scheme: light;
+
+  --fe-leaf: #448f5c;
+  --fe-leaf-dark: #227341;
+  --fe-soil: #6f4e37;
+  --fe-soil-dark: #3d2b1e;
+  --fe-footer-bg: #7a5a3d;
+  --fe-wheat: #d89b25;
+  --fe-wheat-soft: #eadcc7;
+
+  --fe-primary-50: #faf6ee;
+  --fe-primary-100: #f1e5d2;
+  --fe-primary-200: #d6c1a3;
+  --fe-primary-300: #c49b63;
+  --fe-primary-500: #6f4e37;
+  --fe-primary-600: #2f8f4e;
+  --fe-primary-700: #227341;
+  --fe-primary-800: #5a3a22;
+  --fe-primary-900: #3d2b1e;
+
+  --fe-accent-sky: #1f6f8c;
+  --fe-accent-wheat: var(--fe-wheat);
+  --fe-accent-soil: var(--fe-soil);
+  --fe-danger: #bd412d;
+
+  --fe-bg: #fbf7ef;
+  --fe-bg-soft: #faf6ee;
+  --fe-surface: #ffffff;
+  --fe-surface-muted: #fffaf2;
+  --fe-border: #eadcc7;
+  --fe-text: #2b2119;
+  --fe-text-muted: #726252;
+
+  --fe-shadow-sm: 0 6px 16px rgba(82, 55, 32, 0.09);
+  --fe-shadow-md: 0 14px 35px rgba(82, 55, 32, 0.14);
+  --fe-focus-ring: 0 0 0 3px rgba(216, 155, 37, 0.28);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  background: var(--fe-bg);
+}
+
+body {
+  min-height: 100%;
+  margin: 0;
+  background:
+    radial-gradient(circle at top left, rgba(216, 155, 37, 0.1), transparent 34rem),
+    radial-gradient(circle at top right, rgba(47, 143, 78, 0.08), transparent 30rem),
+    linear-gradient(135deg, #fffaf2 0%, var(--fe-bg) 52%, #f4faf8 100%);
+  color: var(--fe-text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+a {
+  color: inherit;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.68;
+}
+
+input,
+select,
+textarea {
+  background-color: var(--fe-surface);
+  color: var(--fe-text);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--fe-text-muted);
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus-visible,
+a:focus-visible {
+  outline: none;
+  box-shadow: var(--fe-focus-ring);
+}
+
+::selection {
+  background: var(--fe-primary-200);
+  color: var(--fe-primary-900);
+}
+
+@keyframes aiAssistantFlyIn {
+  0% {
+    transform: translate3d(0, 0, 0) scale(0.88);
+    opacity: 0;
+  }
+  60% {
+    transform: translate3d(0, 0, 0) scale(1.02);
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(0, calc(100vh - 8rem), 0) scale(1);
+    opacity: 1;
+  }
+}
+
+.ai-assistant-fab-hidden {
+  transform: translate3d(0, -32px, 0) scale(0.88);
+  opacity: 0;
+}
+
+.ai-assistant-fab-visible {
+  animation: aiAssistantFlyIn 0.9s ease-out forwards;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--fe-bg-soft);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--fe-primary-500);
+  border: 2px solid var(--fe-bg-soft);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--fe-primary-700);
+}
+
+@layer components {
+  .bg-white {
+    background-color: var(--fe-surface);
+  }
+
+  .shadow-lg {
+    box-shadow: var(--fe-shadow-md);
+  }
+
+  .shadow-md {
+    box-shadow: var(--fe-shadow-sm);
+  }
+
+  .border-gray-300,
+  .border-gray-200,
+  .border-green-100,
+  .border-green-200 {
+    border-color: var(--fe-border);
+  }
+}

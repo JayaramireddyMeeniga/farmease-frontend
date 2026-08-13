@@ -1,0 +1,68 @@
+<svg width="600" height="300" viewBox="0 0 680 340" xmlns="http://www.w3.org/2000/svg">
+  <title>FarmEase Logo</title>
+  <desc>FarmEase agricultural app logo featuring a wheat stalk and leaf inside a green circular emblem with the brand name</desc>
+
+  <!-- Outer circle ring -->
+  <circle cx="170" cy="170" r="118" fill="#2d6a2d"/>
+  <circle cx="170" cy="170" r="108" fill="#f5f9f0"/>
+  <!-- Inner background circle -->
+  <circle cx="170" cy="170" r="100" fill="#e8f5e2"/>
+
+  <!-- Sun rays -->
+  <g stroke="#f0c040" stroke-width="2" stroke-linecap="round" opacity="0.7">
+    <line x1="170" y1="78" x2="170" y2="90"/>
+    <line x1="200" y1="85" x2="194" y2="95"/>
+    <line x1="221" y1="107" x2="212" y2="113"/>
+    <line x1="227" y1="140" x2="215" y2="142"/>
+    <line x1="140" y1="85" x2="146" y2="95"/>
+    <line x1="119" y1="107" x2="128" y2="113"/>
+    <line x1="113" y1="140" x2="125" y2="142"/>
+  </g>
+
+  <!-- Sun -->
+  <circle cx="170" cy="112" r="18" fill="#f5c842" opacity="0.9"/>
+  <circle cx="170" cy="112" r="12" fill="#f9d95e"/>
+
+  <!-- Ground base -->
+  <ellipse cx="170" cy="240" rx="72" ry="10" fill="#7db85a" opacity="0.5"/>
+
+  <!-- Main wheat stalk -->
+  <line x1="170" y1="238" x2="170" y2="148" stroke="#5a8a2d" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- Wheat grains -->
+  <ellipse cx="170" cy="144" rx="7" ry="11" fill="#d4a830" transform="rotate(-15 170 144)"/>
+  <ellipse cx="162" cy="152" rx="6" ry="10" fill="#c89e28" transform="rotate(-30 162 152)"/>
+  <ellipse cx="178" cy="152" rx="6" ry="10" fill="#c89e28" transform="rotate(30 178 152)"/>
+  <ellipse cx="158" cy="162" rx="5" ry="9" fill="#b89020" transform="rotate(-40 158 162)"/>
+  <ellipse cx="182" cy="162" rx="5" ry="9" fill="#b89020" transform="rotate(40 182 162)"/>
+  <ellipse cx="156" cy="172" rx="4" ry="8" fill="#a88018" transform="rotate(-50 156 172)"/>
+  <ellipse cx="184" cy="172" rx="4" ry="8" fill="#a88018" transform="rotate(50 184 172)"/>
+
+  <!-- Wheat awns -->
+  <line x1="170" y1="133" x2="168" y2="120" stroke="#c8a030" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="164" y1="143" x2="155" y2="132" stroke="#b89028" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="176" y1="143" x2="185" y2="132" stroke="#b89028" stroke-width="1.5" stroke-linecap="round"/>
+
+  <!-- Leaves -->
+  <path d="M170 200 Q145 188 138 168 Q148 172 170 200" fill="#4a9a30" opacity="0.9"/>
+  <path d="M170 195 Q196 183 202 162 Q192 167 170 195" fill="#5aaa38" opacity="0.9"/>
+
+  <!-- Small sprout left -->
+  <line x1="138" y1="240" x2="138" y2="218" stroke="#5a8a2d" stroke-width="2" stroke-linecap="round"/>
+  <path d="M138 225 Q128 218 124 210 Q132 212 138 225" fill="#6ab840" opacity="0.8"/>
+
+  <!-- Small sprout right -->
+  <line x1="202" y1="240" x2="202" y2="218" stroke="#5a8a2d" stroke-width="2" stroke-linecap="round"/>
+  <path d="M202 225 Q212 218 216 210 Q208 212 202 225" fill="#6ab840" opacity="0.8"/>
+
+  <!-- Brand name -->
+  <text x="320" y="175" font-family="Arial, sans-serif" font-size="52" font-weight="700" letter-spacing="-1" text-anchor="middle">
+    <tspan fill="#2d6a2d">Farm</tspan><tspan fill="#5aaa38">Ease</tspan>
+  </text>
+
+  <!-- Tagline -->
+  <text x="320" y="210" font-family="Arial, sans-serif" font-size="16" font-weight="400" letter-spacing="3" fill="#5a8a5a" text-anchor="middle">GROW SMARTER</text>
+
+  <!-- Divider line -->
+  <line x1="240" y1="222" x2="400" y2="222" stroke="#5aaa38" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
+</svg>

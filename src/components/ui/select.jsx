@@ -138,7 +138,7 @@ const Select = React.forwardRef(
             <span
               className={cn(
                 "block truncate text-sm font-semibold leading-5",
-                selectedOption ? "text-[var(--fe-text)]" : "text-gray-500"
+                selectedOption ? "text-(--fe-text)" : "text-gray-500"
               )}
             >
               {displayLabel}
@@ -147,8 +147,8 @@ const Select = React.forwardRef(
 
           <span
             className={cn(
-              "grid h-8 w-8 shrink-0 place-items-center rounded-md bg-[var(--fe-bg-soft)] text-[var(--fe-primary-700)] transition-all duration-200",
-              open && "rotate-180 bg-[var(--fe-primary-100)]"
+              "grid h-7 w-7 shrink-0 place-items-center rounded bg-(--fe-bg-soft) text-(--fe-primary-700) transition-all duration-200",
+              open && "rotate-180 bg-(--fe-primary-100)"
             )}
           >
             <ChevronDown className="h-4 w-4" />
@@ -176,7 +176,7 @@ const Select = React.forwardRef(
                     "flex w-full items-center gap-2 px-3 py-2 text-left text-sm transition-colors",
                     selected
                       ? "bg-green-50 font-semibold text-green-800"
-                      : "text-[var(--fe-text)] hover:bg-gray-50",
+                      : "text-(--fe-text) hover:bg-gray-50",
                     option.disabled && "cursor-not-allowed opacity-50"
                   )}
                 >

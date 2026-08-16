@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Home from "./pages/Home/Home";
 import Tips from "./pages/Tips/Tips";
 import Dealers from "./pages/Dealers/Dealers";
@@ -79,20 +79,16 @@ const HashScroller = () => {
 
 const Layout = ({ children }) => {
   const location = useLocation();
-  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const hideHeaderFooter = ["/", "/signup"].includes(location.pathname);
 
   return (
-    <div className="flex min-h-screen bg-[var(--fe-bg)] text-[var(--fe-text)]">
-      {!hideHeaderFooter && (
-        <div className={`hidden shrink-0 overflow-hidden bg-green-900 text-white transition-[width] duration-500 ease-in-out lg:block ${sidebarCollapsed ? "w-16 xl:w-20" : "w-56 xl:w-60"}`}>
-          <Sidebar collapsed={sidebarCollapsed} onCollapseToggle={() => setSidebarCollapsed((value) => !value)} />
-        </div>
-      )}
-
-      <div className="flex min-w-0 flex-1 flex-col">
+    <div className="min-h-screen bg-[var(--fe-bg)] text-[var(--fe-text)]">
+      <div className="flex min-h-screen min-w-0 flex-col">
         {!hideHeaderFooter && <Header />}
-        <main className="flex-1">{children}</main>
+        <main className={`flex-1 ${hideHeaderFooter ? "" : "pb-28 lg:pb-32"}`}>
+          {children}
+        </main>
+        {!hideHeaderFooter && <Sidebar />}
         {!hideHeaderFooter && <FloatingAIAssistant />}
         {!hideHeaderFooter && <Footer />}
       </div>

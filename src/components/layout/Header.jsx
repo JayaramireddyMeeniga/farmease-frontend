@@ -1,9 +1,10 @@
 import React, { useMemo, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBell,
   faChevronDown,
+  faCloudSun,
   faRightFromBracket,
   faSeedling,
   faUserCircle,
@@ -70,18 +71,12 @@ const searchablePages = [
 ];
 
 const Header = () => {
-  const location = useLocation();
   const navigate = useNavigate();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [query, setQuery] = useState("");
   const userRole = getStoredUserRole();
   const roleHomePath = getRoleHomePath(userRole);
   const roleLabel = ROLE_LABELS[userRole] || "Farmer";
-
-  const navItems = [
-    { path: roleHomePath, label: "Home" },
-    { path: "/marketplace", label: "Marketplace" },
-  ];
 
   const searchIndex = useMemo(
     () =>
@@ -124,42 +119,50 @@ const Header = () => {
   };
 
   return (
-    <header className="sticky top-0 z-30 border-b border-[#eadcc7] bg-white/95 shadow-[0_10px_28px_rgba(82,55,32,0.12)] backdrop-blur">
-      <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-4 py-2 pl-16 sm:px-6 lg:grid-cols-[minmax(16rem,24rem)_1fr_auto] lg:pl-6">
-        <HeaderSearchInput
-          value={query}
-          onChange={setQuery}
-          onSubmit={handleSearchSubmit}
-        />
+    <header className="sticky top-0 z-30 border-b border-white/70 bg-[#f8fbf5]/88 shadow-[0_14px_40px_rgba(38,50,37,0.1)] backdrop-blur-2xl">
+      <div className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 px-4 py-3 sm:px-6 md:grid-cols-[auto_minmax(18rem,40rem)_auto]">
+        <Link
+          to={roleHomePath}
+          className="flex items-center gap-2.5 rounded-md px-1 py-1 transition hover:bg-white/70 sm:px-2"
+          aria-label="Go to workspace home"
+        >
+          <span className="flex px-3.5 py-3 shrink-0 items-center justify-center rounded-lg bg-[#17251e] text-sm font-black text-[#f5c66a] shadow-[0_14px_28px_rgba(23,37,30,0.24)]">
+            FE
+          </span>
+          <span className="hidden min-w-0 sm:block">
+            <span className="block text-base font-extrabold leading-tight text-[#17251e]">
+              FarmEase
+            </span>
+            <span className="block text-xs font-semibold text-[#69786d]">
+              {roleLabel} workspace
+            </span>
+          </span>
+        </Link>
 
-        <nav className="order-3 col-span-2 flex justify-center gap-2 lg:order-none lg:col-span-1">
-          {navItems.map((item) => {
-            const isActive = location.pathname === item.path;
-
-            return (
-              <Link
-                key={item.path}
-                to={item.path}
-                className={`rounded-full px-5 py-2 text-sm font-semibold transition ${
-                  isActive
-                    ? "bg-[#8f6a46] !text-white shadow-[0_10px_22px_rgba(143,106,70,0.26)]"
-                    : "text-[var(--fe-text-muted)] hover:bg-[#fff4e5] hover:text-[#8f6a46]"
-                }`}
-              >
-                {item.label}
-              </Link>
-            );
-          })}
-        </nav>
+        <div className="order-3 col-span-3 w-full justify-self-center md:order-0 md:col-span-1 md:max-w-2xl">
+          <HeaderSearchInput
+            value={query}
+            onChange={setQuery}
+            onSubmit={handleSearchSubmit}
+          />
+        </div>
 
         <div className="flex items-center justify-end gap-2 sm:gap-3">
+          <Link
+            to="/weatherForeCast"
+            className="hidden h-10 items-center gap-2 rounded-lg bg-white px-3 text-sm font-bold text-[#2f7d5a] shadow-sm ring-1 ring-[#dfebdc] transition hover:bg-[#edf5e9] md:flex"
+          >
+            <FontAwesomeIcon icon={faCloudSun} className="text-sm" />
+            Weather
+          </Link>
+
           <button
             type="button"
-            className="relative flex h-10 w-10 items-center justify-center rounded-full border border-[#eadcc7] bg-[#fffaf2] text-[#5a3a22] shadow-sm transition hover:border-[#c49b63] hover:bg-white"
+            className="relative flex h-10 w-10 items-center justify-center rounded-lg bg-white text-[#405146] shadow-sm ring-1 ring-[#dfebdc] transition hover:bg-[#edf5e9]"
             aria-label="Notifications"
           >
             <FontAwesomeIcon icon={faBell} className="text-xs" />
-            <span className="absolute right-0 top-0.5 flex py-1 min-w-5 items-center justify-center rounded-full bg-pink-600 px-1 text-[10px] font-bold leading-none text-white ring-2 ring-white">
+            <span className="absolute -right-1 -top-1 flex min-w-5 items-center justify-center rounded-full bg-[#e45448] px-1 py-1 text-[10px] font-bold leading-none text-white ring-2 ring-[#f8fbf5]">
               3
             </span>
           </button>
@@ -168,37 +171,36 @@ const Header = () => {
             <button
               type="button"
               onClick={() => setDropdownOpen((open) => !open)}
-              className={`flex items-center gap-2 rounded-full border p-1.5 pr-2 text-[var(--fe-text)] shadow-sm transition ${
-                dropdownOpen
-                  ? "border-[#8f6a46] bg-white"
-                  : "border-[#eadcc7] bg-[#fffaf2] hover:border-[#c49b63] hover:bg-white"
-              }`}
+              className={`flex items-center gap-2 rounded-lg p-1.5 pr-2 text-(--fe-text) shadow-sm ring-1 transition ${dropdownOpen
+                ? "bg-white ring-[#2f7d5a]"
+                : "bg-white ring-[#dfebdc] hover:bg-[#edf5e9]"
+                }`}
               aria-label="Open profile menu"
             >
-              <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#448f5c] text-white shadow-inner">
+              <span className="flex h-8 w-8 items-center justify-center rounded-md bg-[#2f7d5a] text-white shadow-inner">
                 <FontAwesomeIcon icon={faUserCircle} className="text-xl" />
               </span>
               <FontAwesomeIcon
                 icon={faChevronDown}
-                className="hidden text-xs text-[var(--fe-text-muted)] sm:block"
+                className="hidden text-xs text-(--fe-text-muted) sm:block"
               />
             </button>
 
             {dropdownOpen && (
-              <div className="absolute right-0 mt-3 w-64 overflow-hidden rounded-2xl border border-[#eadcc7] bg-white text-gray-800 shadow-[0_24px_60px_rgba(82,55,32,0.2)]">
-                <div className="bg-[#fffaf2] p-3">
+              <div className="absolute right-0 mt-3 w-64 overflow-hidden rounded-3xl border border-[#dfebdc] bg-white text-gray-800 shadow-[0_24px_60px_rgba(38,50,37,0.18)]">
+                <div className="bg-[#f8fbf5] p-3">
                   <div className="flex items-center gap-3">
-                    <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#448f5c] text-white shadow-sm">
+                    <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[#2f7d5a] text-white shadow-sm">
                       <FontAwesomeIcon
                         icon={faUserCircle}
                         className="text-xl"
                       />
                     </span>
                     <span className="min-w-0">
-                      <span className="block truncate text-sm font-bold text-[var(--fe-text)]">
+                      <span className="block truncate text-sm font-bold text-(--fe-text)">
                         FarmEase User
                       </span>
-                      <span className="mt-0.5 inline-flex items-center gap-1 rounded-full bg-white px-2 py-0.5 text-xs font-semibold text-[#8f6a46] ring-1 ring-[#eadcc7]">
+                      <span className="mt-0.5 inline-flex items-center gap-1 rounded-full bg-white px-2 py-0.5 text-xs font-semibold text-[#2f7d5a] ring-1 ring-[#dfebdc]">
                         <FontAwesomeIcon
                           icon={faSeedling}
                           className="text-[10px]"
@@ -210,7 +212,7 @@ const Header = () => {
                 </div>
                 <Link
                   to="/profile"
-                  className="flex items-center gap-3 px-3 py-2 text-sm font-semibold text-[var(--fe-text)] transition hover:bg-[#fff4e5] hover:text-[#8f6a46]"
+                  className="flex items-center gap-3 px-3 py-2 text-sm font-semibold text-(--fe-text) transition hover:bg-[#edf5e9] hover:text-[#1f6f4d]"
                   onClick={() => setDropdownOpen(false)}
                 >
                   <FontAwesomeIcon
@@ -221,7 +223,7 @@ const Header = () => {
                 </Link>
                 <button
                   onClick={handleLogout}
-                  className="flex w-full items-center gap-3 border-t border-[#eadcc7] px-3 py-2 text-left text-sm font-semibold text-[var(--fe-text)] transition hover:bg-[#fff4e5] hover:text-[#8f6a46]"
+                  className="flex w-full items-center gap-3 border-t border-[#dfebdc] px-3 py-2 text-left text-sm font-semibold text-(--fe-text) transition hover:bg-[#edf5e9] hover:text-[#1f6f4d]"
                 >
                   <FontAwesomeIcon
                     icon={faRightFromBracket}

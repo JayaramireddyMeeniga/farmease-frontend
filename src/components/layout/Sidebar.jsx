@@ -1,9 +1,15 @@
-import React, { useEffect, useMemo, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import React, { useMemo, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faBars, faChevronDown, faChevronLeft, faLeaf, faRightFromBracket,
-  faSeedling, faShoppingBasket, faTimes, faTruck, faUserCircle, faUsers
+  faChevronDown,
+  faCompass,
+  faLeaf,
+  faSeedling,
+  faShoppingBasket,
+  faTruck,
+  faUsers,
+  faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import {
   getRoleHomePath,
@@ -30,12 +36,12 @@ const navGroups = [
     icon: faLeaf,
     roles: ["farmer"],
     items: [
-      { path: "/farmer/products", label: "Farmer Products" },
-      { path: "/farmer/orders", label: "Farmer Orders" },
-      { path: "/farmer/wallet", label: "Farmer Wallet" },
-      { path: "/farmer/analytics", label: "Farmer Analytics" },
-      { path: "/farmer/delivery", label: "Farmer Delivery" },
-      { path: "/farmer/subscription", label: "Farmer Subscription" },
+      { path: "/farmer/products", label: "Products" },
+      { path: "/farmer/orders", label: "Orders" },
+      { path: "/farmer/wallet", label: "Wallet" },
+      { path: "/farmer/analytics", label: "Analytics" },
+      { path: "/farmer/delivery", label: "Delivery" },
+      { path: "/farmer/subscription", label: "Subscription" },
     ],
   },
   {
@@ -55,19 +61,19 @@ const navGroups = [
   },
   {
     id: "deliveryPartner",
-    label: "Delivery Partner",
+    label: "Delivery",
     icon: faTruck,
     roles: ["deliveryPartner"],
     items: [
-      { path: "/delivery-partner/orders", label: "Delivery Orders" },
-      { path: "/delivery-partner/tracking", label: "Delivery Tracking" },
-      { path: "/delivery-partner/wallet", label: "Delivery Wallet" },
+      { path: "/delivery-partner/orders", label: "Orders" },
+      { path: "/delivery-partner/tracking", label: "Tracking" },
+      { path: "/delivery-partner/wallet", label: "Wallet" },
       { path: "/cold-storage-search", label: "Cold Storage" },
     ],
   },
   {
     id: "commerce",
-    label: "Orders & Market",
+    label: "Market",
     icon: faTruck,
     roles: ["farmer"],
     items: [
@@ -76,12 +82,12 @@ const navGroups = [
       { path: "/marketprice", label: "Market Prices" },
       { path: "/dealers", label: "Dealers" },
       { path: "/cold-storage-search", label: "Cold Storage" },
-      { path: "/farmer-live-shop", label: "Farmer Live Shop" },
+      { path: "/farmer-live-shop", label: "Live Shop" },
     ],
   },
   {
     id: "agriculturalTips",
-    label: "Agricultural Tips",
+    label: "Guides",
     icon: faSeedling,
     roles: ["farmer"],
     items: [
@@ -91,7 +97,7 @@ const navGroups = [
       { path: "/agricultural-tips/organic", label: "Organic Farming" },
       { path: "/agricultural-tips/weather", label: "Weather Tips" },
       { path: "/agricultural-tips/pest-control", label: "Pest Control" },
-      { path: "/agricultural-tips/schemes", label: "Government Schemes" },
+      { path: "/agricultural-tips/schemes", label: "Schemes" },
       { path: "/agricultural-tips/video", label: "Video Learning" },
       { path: "/agricultural-tips/ai", label: "AI Recommendations" },
       { path: "/agricultural-tips/expert", label: "Expert Advice" },
@@ -99,7 +105,7 @@ const navGroups = [
   },
   {
     id: "community",
-    label: "Community",
+    label: "People",
     icon: faUsers,
     roles: ["farmer"],
     items: [
@@ -115,28 +121,13 @@ const splitPath = (path) => {
   return { pathname, hash: hash ? `#${hash}` : "" };
 };
 
-const Sidebar = ({ collapsed, onCollapseToggle }) => {
+const Sidebar = () => {
   const location = useLocation();
-  const navigate = useNavigate();
   const userRole = getStoredUserRole();
-  const roleLabel = ROLE_LABELS[userRole] || "Farmer";
   const roleHomePath = getRoleHomePath(userRole);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [openGroups, setOpenGroups] = useState({
-    farm: false,
-    farmer: false,
-    customer: false,
-    deliveryPartner: false,
-    commerce: false,
-    agriculturalTips: false,
-    community: false,
-  });
+  const roleLabel = ROLE_LABELS[userRole] || "Farmer";
+  const [activePanel, setActivePanel] = useState(null);
 
-  const sidebarWidth = collapsed
-    ? "w-56 lg:w-16 xl:w-20"
-    : "w-56 lg:w-56 xl:w-62";
-  const activeItemClass = "bg-green-300 text-green-700 shadow-sm";
   const visibleNavGroups = useMemo(
     () => navGroups.filter((group) => group.roles.includes(userRole)),
     [userRole],
@@ -147,262 +138,114 @@ const Sidebar = ({ collapsed, onCollapseToggle }) => {
     return location.pathname === pathname && (!hash || location.hash === hash);
   };
 
-  const activeGroupId = visibleNavGroups.find((group) =>
+  const activeGroup = visibleNavGroups.find((group) =>
     group.items.some(
       (item) =>
         isActive(item.path) ||
         location.pathname === splitPath(item.path).pathname,
     ),
-  )?.id;
+  );
 
-  useEffect(() => {
-    if (!activeGroupId) {
-      setOpenGroups(
-        visibleNavGroups.reduce((acc, group) => {
-          acc[group.id] = false;
-          return acc;
-        }, {}),
-      );
-      return;
-    }
-
-    setOpenGroups(
-      visibleNavGroups.reduce((acc, group) => {
-        acc[group.id] = group.id === activeGroupId;
-        return acc;
-      }, {}),
-    );
-  }, [activeGroupId, visibleNavGroups]);
-
-  const closeMobileSidebar = () => {
-    setSidebarOpen(false);
-    setDropdownOpen(false);
-  };
-
-  const handleNavClick = () => {
-    closeMobileSidebar();
-  };
-
-  const handleBrandClick = (event) => {
-    if (collapsed && onCollapseToggle) {
-      event.preventDefault();
-      onCollapseToggle();
-      return;
-    }
-
-    handleNavClick();
-  };
-
-  const handleProfileClick = () => {
-    if (collapsed && onCollapseToggle) {
-      onCollapseToggle();
-      setDropdownOpen(true);
-      return;
-    }
-
-    setDropdownOpen((open) => !open);
-  };
-
-  const handleLogout = () => {
-    closeMobileSidebar();
-    localStorage.removeItem("isLoggedIn");
-    localStorage.removeItem("activeRole");
-    navigate("/");
-  };
-
-  const toggleGroup = (groupId) => {
-    setOpenGroups((current) =>
-      visibleNavGroups.reduce((acc, group) => {
-        acc[group.id] = group.id === groupId ? !current[groupId] : false;
-        return acc;
-      }, {}),
-    );
-  };
+  const selectedGroup =
+    visibleNavGroups.find((group) => group.id === activePanel) || activeGroup;
 
   const handleGroupClick = (groupId) => {
-    if (collapsed && onCollapseToggle) {
-      onCollapseToggle();
-      setOpenGroups(
-        visibleNavGroups.reduce((acc, group) => {
-          acc[group.id] = group.id === groupId;
-          return acc;
-        }, {}),
-      );
-      return;
-    }
-
-    toggleGroup(groupId);
+    setActivePanel((current) => (current === groupId ? null : groupId));
   };
 
   return (
-    <>
-      <button
-        onClick={() => setSidebarOpen((open) => !open)}
-        className="fixed left-4 top-4 z-50 rounded-lg bg-[var(--fe-leaf-dark)] p-2 text-white shadow-md lg:hidden"
-        aria-label={sidebarOpen ? "Close navigation" : "Open navigation"}
-      >
-        <FontAwesomeIcon
-          icon={sidebarOpen ? faTimes : faBars}
-          className="text-xl"
-        />
-      </button>
-
-      <aside
-        className={`fixed inset-y-0 left-0 z-40 transform bg-[var(--fe-leaf)] text-white shadow-2xl shadow-green-950/20 transition-[width,transform] duration-500 ease-in-out ${sidebarWidth} ${sidebarOpen ? "translate-x-0" : "-translate-x-full"
-          } lg:translate-x-0`}
-      >
-        <div className="relative flex h-full flex-col overflow-hidden border-r border-green-800/50">
-          <Link
-            to={roleHomePath}
-            onClick={handleBrandClick}
-            className={`flex items-center gap-3 border-b border-white/10 px-4 py-4 ${collapsed ? "justify-center lg:px-2" : ""
-              }`}
-            aria-label={
-              collapsed ? "Expand sidebar" : `Go to ${roleLabel} home`
-            }
-          >
-            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white text-base font-bold text-green-900 shadow-sm">
-              FE
-            </span>
-            <span className={collapsed ? "hidden" : "block"}>
-              <span className="block text-lg font-bold leading-tight">
-                FarmEase
+    <div className="fixed inset-x-0 bottom-4 z-40 px-3 sm:px-5">
+      {selectedGroup && activePanel && (
+        <div className="mx-auto mb-3 max-w-4xl overflow-hidden rounded-[2rem] border border-white/70 bg-white/90 shadow-[0_30px_80px_rgba(38,50,37,0.22)] backdrop-blur-2xl">
+          <div className="flex items-center justify-between gap-3 border-b border-[#e5efe2] bg-[#f8fbf5] px-4 py-3">
+            <div className="flex min-w-0 items-center gap-3">
+              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-[#2f7d5a] text-white shadow-[0_12px_24px_rgba(47,125,90,0.25)]">
+                <FontAwesomeIcon icon={selectedGroup.icon} />
               </span>
-              <span className="text-xs text-green-100">
-                {roleLabel} workspace
-              </span>
-            </span>
-          </Link>
-
-          {!collapsed && (
+              <div className="min-w-0">
+                <p className="truncate text-sm font-bold text-[#17251e]">
+                  {selectedGroup.label}
+                </p>
+                <p className="truncate text-xs font-medium text-[#6a786d]">
+                  {roleLabel} workspace
+                </p>
+              </div>
+            </div>
             <button
               type="button"
-              onClick={onCollapseToggle}
-              className="absolute right-3 top-5 hidden h-8 w-8 items-center justify-center rounded-full border border-white/15 bg-white/10 text-white transition-colors duration-300 hover:bg-white/20 lg:flex"
-              aria-label="Collapse sidebar"
+              onClick={() => setActivePanel(null)}
+              className="flex h-9 w-9 items-center justify-center rounded-full bg-white text-[#405146] shadow-sm ring-1 ring-[#e5efe2] transition hover:bg-[#edf5e9]"
+              aria-label="Close navigation panel"
             >
-              <FontAwesomeIcon icon={faChevronLeft} className="text-xs" />
+              <FontAwesomeIcon icon={faXmark} className="text-sm" />
             </button>
-          )}
+          </div>
 
-          <nav className="flex-1 overflow-y-auto px-3 py-4">
-            <div className="md:space-y-2 lg:space-y-4 space-y-4">
-              {visibleNavGroups.map((group) => {
-                const isOpen = openGroups[group.id];
-                const groupActive = activeGroupId === group.id;
+          <div className="grid max-h-[46vh] gap-2 overflow-y-auto p-3 sm:grid-cols-2 lg:grid-cols-3">
+            {selectedGroup.items.map((item) => (
+              <Link
+                key={item.path}
+                to={item.path}
+                onClick={() => setActivePanel(null)}
+                className={`rounded-2xl px-4 py-3 text-sm font-semibold transition ${
+                  isActive(item.path)
+                    ? "bg-[#17251e] text-white shadow-[0_14px_28px_rgba(23,37,30,0.22)]"
+                    : "bg-white text-[#2d3f33] ring-1 ring-[#e5efe2] hover:bg-[#edf5e9] hover:text-[#1f6f4d]"
+                }`}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
 
-                return (
-                  <section key={group.id}>
-                    <button
-                      type="button"
-                      onClick={() => handleGroupClick(group.id)}
-                      className={`grid w-full items-center rounded-lg px-3 py-2 text-sm font-semibold transition-colors duration-300 ${collapsed
-                          ? "grid-cols-[auto_auto] justify-center gap-2 px-2"
-                          : "grid-cols-[minmax(0,1fr)_auto] gap-4"
-                        } ${groupActive ? activeItemClass : "text-green-50 hover:bg-white/10"}`}
-                    >
-                      <span
-                        className={`flex min-w-0 items-center gap-3 ${collapsed ? "justify-center" : ""}`}
-                      >
-                        <FontAwesomeIcon icon={group.icon} className="w-4" />
-                        <span
-                          className={collapsed ? "hidden" : "block truncate"}
-                        >
-                          {group.label}
-                        </span>
-                      </span>
-                      <FontAwesomeIcon
-                        icon={faChevronDown}
-                        className={`text-xs transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
-                      />
-                    </button>
+      <nav className="mx-auto flex max-w-5xl items-center gap-2 rounded-[2rem] border border-white/70 bg-[#16241d]/95 p-2 text-white shadow-[0_22px_60px_rgba(23,37,30,0.35)] backdrop-blur-2xl">
+        <Link
+          to={roleHomePath}
+          onClick={() => setActivePanel(null)}
+          className={`flex h-12 min-w-12 items-center justify-center rounded-2xl px-3 transition ${
+            location.pathname === roleHomePath
+              ? "bg-white text-[#17251e]"
+              : "text-white/80 hover:bg-white/10 hover:text-white"
+          }`}
+          aria-label="Home"
+        >
+          <FontAwesomeIcon icon={faCompass} />
+        </Link>
 
-                    {isOpen && !collapsed && (
-                      <div className="mt-1 space-y-1 border-l border-white/15 pl-3">
-                        {group.items.map((item) => (
-                          <Link
-                            key={item.path}
-                            to={item.path}
-                            onClick={handleNavClick}
-                            className={`block rounded-md px-3 py-2 text-sm transition-colors duration-300 ${isActive(item.path)
-                                ? `${activeItemClass} font-semibold`
-                                : "text-green-50 hover:bg-white/10"
-                              }`}
-                          >
-                            {item.label}
-                          </Link>
-                        ))}
-                      </div>
-                    )}
-                  </section>
-                );
-              })}
-            </div>
-          </nav>
+        <div className="h-8 w-px shrink-0 bg-white/15" />
 
-          {/* <div className="border-t border-white/10 p-3">
-            {dropdownOpen && !collapsed && (
-              <div className="mb-2 overflow-hidden rounded-lg border border-green-100 bg-white text-gray-800 shadow-xl">
-                <Link
-                  to="/profile"
-                  className="flex items-center gap-3 px-4 py-3 text-sm transition-colors duration-300 hover:bg-gray-100"
-                  onClick={handleNavClick}
-                >
-                  <FontAwesomeIcon icon={faLeaf} className="text-green-600" />
-                  My Profile
-                </Link>
-                <button
-                  onClick={handleLogout}
-                  className="flex w-full items-center gap-3 border-t border-gray-100 px-4 py-3 text-left text-sm transition-colors duration-300 hover:bg-gray-100"
-                >
-                  <FontAwesomeIcon
-                    icon={faRightFromBracket}
-                    className="text-green-600"
-                  />
-                  Logout
-                </button>
-              </div>
-            )}
+        <div className="flex min-w-0 flex-1 items-center gap-2 overflow-x-auto">
+          {visibleNavGroups.map((group) => {
+            const groupActive = activeGroup?.id === group.id;
+            const panelOpen = activePanel === group.id;
 
-            <button
-              onClick={handleProfileClick}
-              className={`flex w-full items-center rounded-lg bg-green-800/65 p-2.5 text-left transition-colors duration-300 hover:bg-green-800 ${
-                collapsed ? "justify-center gap-2" : "justify-between"
-              }`}
-            >
-              <span className="flex min-w-0 items-center gap-3">
-                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white text-green-700">
-                  <FontAwesomeIcon icon={faUserCircle} className="text-xl" />
-                </span>
-                <span className={collapsed ? "hidden" : "min-w-0"}>
-                  <span className="block truncate text-sm font-semibold">
-                    FarmEase User
-                  </span>
-                  <span className="block truncate text-xs text-green-100">
-                    {roleLabel}
-                  </span>
-                </span>
-              </span>
-              {!collapsed && (
+            return (
+              <button
+                key={group.id}
+                type="button"
+                onClick={() => handleGroupClick(group.id)}
+                className={`flex h-12 shrink-0 items-center gap-2 rounded-2xl px-3 text-sm font-semibold transition sm:px-4 ${
+                  panelOpen || groupActive
+                    ? "bg-[#f5c66a] text-[#1d241a] shadow-[0_12px_26px_rgba(245,198,106,0.24)]"
+                    : "text-white/78 hover:bg-white/10 hover:text-white"
+                }`}
+              >
+                <FontAwesomeIcon icon={group.icon} className="text-sm" />
+                <span className="hidden sm:inline">{group.label}</span>
                 <FontAwesomeIcon
                   icon={faChevronDown}
-                  className={`text-xs transition-transform duration-300 ${dropdownOpen ? "rotate-180" : ""}`}
+                  className={`hidden text-[10px] transition-transform sm:inline ${
+                    panelOpen ? "rotate-180" : ""
+                  }`}
                 />
-              )}
-            </button>
-          </div> */}
+              </button>
+            );
+          })}
         </div>
-      </aside>
-
-      {sidebarOpen && (
-        <button
-          type="button"
-          className="fixed inset-0 z-30 bg-black/50 lg:hidden"
-          onClick={() => setSidebarOpen(false)}
-          aria-label="Close navigation overlay"
-        />
-      )}
-    </>
+      </nav>
+    </div>
   );
 };
 

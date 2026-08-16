@@ -10,7 +10,7 @@ import {
   Waves,
   Zap,
 } from "lucide-react";
-import { useTankMotorStore } from "../../store/useTankMotorStore";
+import { useTankMotorStore } from "../../../store/useTankMotorStore";
 
 const FULL_TANK_LEVEL = 95;
 
@@ -246,4 +246,3 @@ const TankMotorControl = () => {
 };
 
 export default TankMotorControl;
-

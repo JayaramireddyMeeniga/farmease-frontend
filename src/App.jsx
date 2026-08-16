@@ -1,29 +1,29 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import Home from "./pages/Home/Home";
-import Tips from "./pages/Tips/Tips";
-import Dealers from "./pages/Dealers/Dealers";
+import Tips from "./pages/Farmer/Tips/Tips";
+import Dealers from "./pages/Farmer/Dealers/Dealers";
 import Contact from "./pages/Contact/Contact";
-import Dashboard from "./pages/Dashboard/Dashboard";
+import Dashboard from "./pages/Farmer/Dashboard/Dashboard";
 import Footer from "./components/layout/Footer";
 import Header from "./components/layout/Header";
 import ProductFullDetails from "./pages/ProductFullDetails/ProductFullDetails";
 import Login from "./authentication/login/Login";
 import SignUp from "./authentication/sign_up/SignUp";
 import Profile from "./pages/Profile/Profile";
-import CropManagement from "./pages/CropManagement/CropManagement";
+import CropManagement from "./pages/Farmer/CropManagement/CropManagement";
 import Marketplace from "./pages/MarketPlace/MarketPlace";
-import CommunityForum from "./pages/CommunityForum/CommunityForum";
-import WeatherForeCast from "./pages/WeatherForeCast/WeatherForeCast";
-import IrrigationManagement from "./pages/IrrigationManagement/IrrigationManagement";
-import TankMotorControl from "./pages/TankMotorControl/TankMotorControl";
-import CropRotationPlanner from "./pages/CropRotation/CropRotation";
+import CommunityForum from "./pages/Farmer/CommunityForum/CommunityForum";
+import WeatherForeCast from "./pages/Farmer/WeatherForeCast/WeatherForeCast";
+import IrrigationManagement from "./pages/Farmer/IrrigationManagement/IrrigationManagement";
+import TankMotorControl from "./pages/Farmer/TankMotorControl/TankMotorControl";
+import CropRotationPlanner from "./pages/Farmer/CropRotation/CropRotation";
 import Sidebar from "./components/layout/Sidebar";
-import FarmerLogin from "./pages/AgriculturalJob/AgriculturalJob";
+import FarmerLogin from "./pages/Farmer/AgriculturalJob/AgriculturalJob";
 import './index.css'
 import ProtectedRoute from "./utils/ProtectedRoute";
-import Delivery from "./pages/Delivery/Delivery";
-import MarketPrice from "./pages/MarketPrice/MarketPrice";
+import Delivery from "./pages/Farmer/Delivery/Delivery";
+import MarketPrice from "./pages/Farmer/MarketPrice/MarketPrice";
 import FarmerProducts from "./pages/Farmer/FarmerProducts/FarmerProducts";
 import FarmerOrders from "./pages/Farmer/FarmerOrders/FarmerOrders";
 import FarmerWallet from "./pages/Farmer/FarmerWallet/FarmerWallet";
@@ -40,20 +40,20 @@ import DeliveryDashboard from "./pages/DeliveryPartner/DeliveryDashboard/Deliver
 import DeliveryOrders from "./pages/DeliveryPartner/DeliveryOrders/DeliveryOrders";
 import DeliveryTracking from "./pages/DeliveryPartner/DeliveryTracking/DeliveryTracking";
 import DeliveryWallet from "./pages/DeliveryPartner/DeliveryWallet/DeliveryWallet";
-import ApartmentDelivery from "./pages/ApartmentDelivery/ApartmentDelivery";
-import ColdStorageSearch from "./pages/ColdStorageSearch/ColdStorageSearch";
-import FarmerLiveShop from "./pages/FarmerLiveShop/FarmerLiveShop";
-import SubscriptionDelivery from "./pages/SubscriptionDelivery/SubscriptionDelivery";
-import DailyTips from "./pages/AgriculturalTips/DailyTips/DailyTips";
-import SeasonalTips from "./pages/AgriculturalTips/SeasonalTips/SeasonalTips";
-import VideoTips from "./pages/AgriculturalTips/VideoTips/VideoTips";
-import CropTips from "./pages/AgriculturalTips/CropTips/CropTips";
-import WeatherTips from "./pages/AgriculturalTips/WeatherTips/WeatherTips";
-import OrganicFarming from "./pages/AgriculturalTips/OrganicFarming/OrganicFarming";
-import GovernmentSchemes from "./pages/AgriculturalTips/GovernmentSchemes/GovernmentSchemes";
-import AIRecommendations from "./pages/AgriculturalTips/AIRecommendations/AIRecommendations";
-import ExpertAdvice from "./pages/AgriculturalTips/ExpertAdvice/ExpertAdvice";
-import PestControl from "./pages/AgriculturalTips/PestControl/PestControl";
+import ApartmentDelivery from "./pages/CustomerDelivery/ApartmentDelivery/ApartmentDelivery";
+import ColdStorageSearch from "./pages/DeliveryPartner/ColdStorageSearch/ColdStorageSearch";
+import FarmerLiveShop from "./pages/Farmer/FarmerLiveShop/FarmerLiveShop";
+import SubscriptionDelivery from "./pages/CustomerDelivery/SubscriptionDelivery/SubscriptionDelivery";
+import DailyTips from "./pages/Farmer/AgriculturalTips/DailyTips/DailyTips";
+import SeasonalTips from "./pages/Farmer/AgriculturalTips/SeasonalTips/SeasonalTips";
+import VideoTips from "./pages/Farmer/AgriculturalTips/VideoTips/VideoTips";
+import CropTips from "./pages/Farmer/AgriculturalTips/CropTips/CropTips";
+import WeatherTips from "./pages/Farmer/AgriculturalTips/WeatherTips/WeatherTips";
+import OrganicFarming from "./pages/Farmer/AgriculturalTips/OrganicFarming/OrganicFarming";
+import GovernmentSchemes from "./pages/Farmer/AgriculturalTips/GovernmentSchemes/GovernmentSchemes";
+import AIRecommendations from "./pages/Farmer/AgriculturalTips/AIRecommendations/AIRecommendations";
+import ExpertAdvice from "./pages/Farmer/AgriculturalTips/ExpertAdvice/ExpertAdvice";
+import PestControl from "./pages/Farmer/AgriculturalTips/PestControl/PestControl";
 import AIAssistant from "./pages/AIAssistant/AIAssistant";
 import FloatingAIAssistant from "./components/FloatingAIAssistant";
 
@@ -82,7 +82,7 @@ const Layout = ({ children }) => {
   const hideHeaderFooter = ["/", "/signup"].includes(location.pathname);
 
   return (
-    <div className="min-h-screen bg-[var(--fe-bg)] text-[var(--fe-text)]">
+    <div className="min-h-screen bg-(--fe-bg) text-(--fe-text)">
       <div className="flex min-h-screen min-w-0 flex-col">
         {!hideHeaderFooter && <Header />}
         <main className={`flex-1 ${hideHeaderFooter ? "" : "pb-28 lg:pb-32"}`}>

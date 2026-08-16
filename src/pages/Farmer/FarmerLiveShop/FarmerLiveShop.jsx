@@ -1,5 +1,5 @@
 import React from "react";
-import FeatureModulePage from "../_shared/FeatureModulePage";
+import FeatureModulePage from "../../_shared/FeatureModulePage";
 
 const FarmerLiveShop = () => (
   <FeatureModulePage

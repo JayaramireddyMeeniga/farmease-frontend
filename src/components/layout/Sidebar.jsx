@@ -2,19 +2,11 @@ import React, { useMemo, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faChevronDown,
-  faCompass,
-  faLeaf,
-  faSeedling,
-  faShoppingBasket,
-  faTruck,
-  faUsers,
-  faXmark,
+  faChevronDown, faCompass, faLeaf, faSeedling,
+  faShoppingBasket, faTruck, faUsers, faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import {
-  getRoleHomePath,
-  getStoredUserRole,
-  ROLE_LABELS,
+  getRoleHomePath, getStoredUserRole, ROLE_LABELS,
 } from "../../utils/roleUtils";
 
 const navGroups = [
@@ -156,10 +148,10 @@ const Sidebar = () => {
   return (
     <div className="fixed inset-x-0 bottom-4 z-40 px-3 sm:px-5">
       {selectedGroup && activePanel && (
-        <div className="mx-auto mb-3 max-w-4xl overflow-hidden rounded-[2rem] border border-white/70 bg-white/90 shadow-[0_30px_80px_rgba(38,50,37,0.22)] backdrop-blur-2xl">
+        <div className="mx-auto mb-3 max-w-4xl overflow-hidden rounded-lg border border-white/70 bg-white/90 shadow-[0_30px_80px_rgba(38,50,37,0.22)] backdrop-blur-2xl">
           <div className="flex items-center justify-between gap-3 border-b border-[#e5efe2] bg-[#f8fbf5] px-4 py-3">
             <div className="flex min-w-0 items-center gap-3">
-              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-[#2f7d5a] text-white shadow-[0_12px_24px_rgba(47,125,90,0.25)]">
+              <span className="flex p-2.5 shrink-0 items-center justify-center rounded-lg bg-[#2f7d5a] text-white shadow-[0_12px_24px_rgba(47,125,90,0.25)]">
                 <FontAwesomeIcon icon={selectedGroup.icon} />
               </span>
               <div className="min-w-0">
@@ -187,11 +179,10 @@ const Sidebar = () => {
                 key={item.path}
                 to={item.path}
                 onClick={() => setActivePanel(null)}
-                className={`rounded-2xl px-4 py-3 text-sm font-semibold transition ${
-                  isActive(item.path)
-                    ? "bg-[#17251e] text-white shadow-[0_14px_28px_rgba(23,37,30,0.22)]"
-                    : "bg-white text-[#2d3f33] ring-1 ring-[#e5efe2] hover:bg-[#edf5e9] hover:text-[#1f6f4d]"
-                }`}
+                className={`rounded-lg px-4 py-3 text-sm font-semibold transition ${isActive(item.path)
+                  ? "bg-[#17251e] text-white shadow-[0_14px_28px_rgba(23,37,30,0.22)]"
+                  : "bg-white text-[#2d3f33] ring-1 ring-[#e5efe2] hover:bg-[#edf5e9] hover:text-[#1f6f4d]"
+                  }`}
               >
                 {item.label}
               </Link>
@@ -200,18 +191,17 @@ const Sidebar = () => {
         </div>
       )}
 
-      <nav className="mx-auto flex max-w-5xl items-center gap-2 rounded-[2rem] border border-white/70 bg-[#16241d]/95 p-2 text-white shadow-[0_22px_60px_rgba(23,37,30,0.35)] backdrop-blur-2xl">
+      <nav className="mx-auto flex max-w-5xl items-center gap-2 rounded-4xl border border-white/55 bg-[#14231c]/95 p-2 text-white shadow-[0_22px_60px_rgba(23,37,30,0.35)] backdrop-blur-2xl">
         <Link
           to={roleHomePath}
           onClick={() => setActivePanel(null)}
-          className={`flex h-12 min-w-12 items-center justify-center rounded-2xl px-3 transition ${
-            location.pathname === roleHomePath
-              ? "bg-white text-[#17251e]"
-              : "text-white/80 hover:bg-white/10 hover:text-white"
-          }`}
+          className={`flex min-w-12 items-center justify-center rounded-full p-3 transition ${location.pathname === roleHomePath
+            ? "bg-[#20392e] text-[#f5c66a] shadow-[inset_0_1px_0_rgba(255,255,255,0.16),0_12px_28px_rgba(36,124,82,0.24)] ring-1 ring-[#5fa979]/35"
+            : "text-white/72 hover:bg-white/10 hover:text-white"
+            }`}
           aria-label="Home"
         >
-          <FontAwesomeIcon icon={faCompass} />
+          FE
         </Link>
 
         <div className="h-8 w-px shrink-0 bg-white/15" />
@@ -226,19 +216,31 @@ const Sidebar = () => {
                 key={group.id}
                 type="button"
                 onClick={() => handleGroupClick(group.id)}
-                className={`flex h-12 shrink-0 items-center gap-2 rounded-2xl px-3 text-sm font-semibold transition sm:px-4 ${
-                  panelOpen || groupActive
-                    ? "bg-[#f5c66a] text-[#1d241a] shadow-[0_12px_26px_rgba(245,198,106,0.24)]"
-                    : "text-white/78 hover:bg-white/10 hover:text-white"
-                }`}
+                className={`group relative flex h-12 shrink-0 items-center gap-2 overflow-hidden rounded-xl px-3 text-sm font-semibold transition sm:px-4 ${panelOpen || groupActive
+                  ? "bg-[#20392e] text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.14),0_16px_34px_rgba(36,124,82,0.24)] ring-1 ring-[#5fa979]/35"
+                  : "text-white/68 hover:bg-white/10 hover:text-white"
+                  }`}
               >
-                <FontAwesomeIcon icon={group.icon} className="text-sm" />
-                <span className="hidden sm:inline">{group.label}</span>
+                {(panelOpen || groupActive) && (
+                  <>
+                    <span className="pointer-events-none absolute inset-0 rounded-xl border border-[#6faa83]/60" />
+                    {/* <span className="absolute left-1/2 top-1 h-1.5 w-8 -translate-x-1/2 rounded-full bg-[#f5c66a] shadow-[0_0_18px_rgba(245,198,106,0.55)]" /> */}
+                    <span className="absolute inset-y-2 left-0 w-1 rounded-r-full bg-[#5fa979]" />
+                  </>
+                )}
+                <span
+                  className={`relative flex h-7 w-7 items-center justify-center rounded-xl transition ${panelOpen || groupActive
+                    ? "bg-[#f5c66a] text-[#17251e] shadow-[0_8px_18px_rgba(245,198,106,0.28)]"
+                    : "text-white/72 group-hover:bg-white/10 group-hover:text-white"
+                    }`}
+                >
+                  <FontAwesomeIcon icon={group.icon} className="text-sm" />
+                </span>
+                <span className="relative hidden sm:inline">{group.label}</span>
                 <FontAwesomeIcon
                   icon={faChevronDown}
-                  className={`hidden text-[10px] transition-transform sm:inline ${
-                    panelOpen ? "rotate-180" : ""
-                  }`}
+                  className={`relative hidden text-[10px] transition-transform sm:inline ${panelOpen ? "rotate-180" : ""
+                    }`}
                 />
               </button>
             );

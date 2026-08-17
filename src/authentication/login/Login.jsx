@@ -3,17 +3,20 @@ import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { Input } from "../../components/ui/input";
 import { Select } from "../../components/ui/select";
+import AuthSidePanel from "../components/AuthSidePanel";
+import {
+  authInputClass,
+  authPasswordInputClass,
+  authSelectClass,
+} from "../components/authFormStyles";
 import {
   ArrowRight,
   BadgeCheck,
   Bike,
   Eye,
   EyeOff,
-  Leaf,
-  Route,
   ShieldCheck,
   Sprout,
-  Tractor,
 } from "lucide-react";
 import { getRoleHomePath, getStoredUserRole } from "../../utils/roleUtils";
 
@@ -114,75 +117,14 @@ const Login = () => {
 
   return (
     <div className="flex h-screen items-center justify-center overflow-hidden bg-[linear-gradient(135deg,#f7fbf3_0%,#eff8e9_48%,#fffaf0_100%)] text-[#203226]">
-      <div className="grid w-full max-w-4xl grid-cols-[60%_40%] overflow-hidden border border-white/80 bg-white/75 shadow-[0_20px_48px_rgba(52,74,45,0.15)] max-[900px]:h-auto max-[900px]:max-h-[calc(100vh-32px)] max-[900px]:max-w-md max-[900px]:grid-cols-1 max-[900px]:overflow-auto">
-        <section
-          className="flex flex-col justify-center gap-4 bg-[linear-gradient(160deg,rgba(29,88,52,0.92),rgba(36,116,70,0.78))] p-6 text-white max-[900px]:p-5"
-          aria-label="FarmEase direct delivery"
-        >
-          <div className="inline-flex w-fit items-center gap-2 text-base font-extrabold">
-            <span className="grid h-8 w-8 place-items-center bg-[#f4c04f] text-[#1c5f38] shadow-[0_12px_26px_rgba(20,45,30,0.18)]">
-              <Leaf size={18} />
-            </span>
-            <span>FarmEase</span>
-          </div>
-
-          <div className="max-w-2xl">
-            <p className="mb-2 w-fit border border-white/25 bg-white/15 px-2.5 py-1.5 text-[11px] font-bold uppercase">
-              Farmer to doorstep network
-            </p>
-            <h1 className="m-0 max-w-xl text-2xl font-semibold leading-[1.12]">
-              Fresh produce moves from farmers to homes without middlemen.
-            </h1>
-            <p className="mt-2 max-w-lg text-xs leading-5 text-white/80">
-              Sign in to manage field stock, customer orders, and delivery
-              movement in one direct supply chain built around the farmer.
-            </p>
-          </div>
-
-          <div
-            className="grid w-full max-w-sm grid-cols-[76px_1fr_76px] items-center gap-2 border border-white/20 bg-[#0b2c1a]/35 p-2 backdrop-blur max-[520px]:grid-cols-1"
-            aria-hidden="true"
-          >
-            <div className="grid min-h-16 place-items-center gap-1 bg-[#fffaf0] text-center text-sm font-extrabold text-[#214b31]">
-              <Tractor size={19} />
-              <span>Farmer</span>
-            </div>
-            <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-2 text-[#f4c04f] max-[520px]:min-h-9 max-[520px]:rotate-90">
-              <span className="h-0.75 bg-[repeating-linear-gradient(90deg,rgba(244,192,79,0.95)_0_12px,transparent_12px_19px)]" />
-              <Route size={18} />
-              <span className="h-0.75 bg-[repeating-linear-gradient(90deg,rgba(244,192,79,0.95)_0_12px,transparent_12px_19px)]" />
-            </div>
-            <div className="grid min-h-16 place-items-center gap-1 bg-[#dff3ff] text-center text-sm font-extrabold text-[#165c75]">
-              <Bike size={19} />
-              <span>Delivery</span>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-3 gap-2 max-[900px]:grid-cols-1">
-            {deliverySteps.map((step) => {
-              const StepIcon = step.icon;
-
-              return (
-                <article
-                  className="flex gap-2 border border-white/20 bg-white/15 p-2"
-                  key={step.title}
-                >
-                  <span className="grid h-7 w-7 shrink-0 place-items-center bg-[#f4c04f]/20 text-[#ffd56f]">
-                    <StepIcon size={15} />
-                  </span>
-                  <div>
-                    <h3 className="m-0 mb-1 text-xs font-bold leading-snug">
-                      {step.title}
-                    </h3>
-                    <p className="m-0 text-[11px] leading-4 text-white/75">
-                      {step.text}
-                    </p>
-                  </div>
-                </article>
-              );
-            })}
-          </div>
-        </section>
+      <div className="grid w-full max-w-4xl grid-cols-[60%_40%] overflow-hidden rounded-md border border-white/80 bg-white/75 shadow-[0_20px_48px_rgba(52,74,45,0.15)] max-[900px]:h-auto max-[900px]:max-h-[calc(100vh-32px)] max-[900px]:max-w-md max-[900px]:grid-cols-1 max-[900px]:overflow-auto">
+        <AuthSidePanel
+          ariaLabel="FarmEase direct delivery"
+          eyebrow="Farmer to doorstep network"
+          title="Fresh produce moves from farmers to homes without middlemen."
+          description="Sign in to manage field stock, customer orders, and delivery movement in one direct supply chain built around the farmer."
+          steps={deliverySteps}
+        />
 
         <section
           className="flex w-full items-center justify-center bg-white"
@@ -213,7 +155,7 @@ const Login = () => {
                   onChange={handleIdentifierChange}
                   placeholder="Enter Aadhaar, Email, or Phone"
                   required
-                  className="rounded-none border-[#dbe7d4] p-2.5 text-xs shadow-none placeholder:text-sm focus-visible:border-[#2f8f4e] focus-visible:ring-[#2f8f4e]/20"
+                  className={authInputClass}
                 />
               </div>
 
@@ -242,7 +184,7 @@ const Login = () => {
                         maxLength="6"
                         placeholder="Enter 6-digit OTP"
                         required
-                        className="min-h-10 rounded-none border-[#dbe7d4] p-2.5 text-xs shadow-none placeholder:text-sm focus-visible:border-[#2f8f4e] focus-visible:ring-[#2f8f4e]/20"
+                        className={authInputClass}
                       />
                     </div>
                   )}
@@ -262,7 +204,7 @@ const Login = () => {
                       onChange={(e) => setPassword(e.target.value)}
                       placeholder="Enter your password"
                       required
-                      className="min-h-10 rounded-none border-[#dbe7d4] p-2.5 pr-11 text-xs shadow-none placeholder:text-sm focus-visible:border-[#2f8f4e] focus-visible:ring-[#2f8f4e]/20"
+                      className={authPasswordInputClass}
                     />
 
                     <button
@@ -286,7 +228,7 @@ const Login = () => {
                   onChange={(e) => setRole(e.target.value)}
                   options={roleOptions}
                   aria-label="Login role"
-                  className="**:[[role=listbox]]:bottom-full **:[[role=listbox]]:top-auto **:[[role=listbox]]:mb-1 **:[[role=listbox]]:mt-0 [&_button>span:first-child>span]:text-sm [&_button>span:first-child>span]:font-normal [&_button>span:first-child>span]:text-[#726252] [&_button]:min-h-10 [&_button]:rounded-none [&_button]:px-2.5 [&_button]:shadow-none"
+                  className={authSelectClass}
                 />
               </div>
 

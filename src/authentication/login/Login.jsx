@@ -109,7 +109,7 @@ const Login = () => {
     localStorage.setItem("isLoggedIn", "true");
     localStorage.setItem("activeRole", role);
 
-    navigate(getRoleHomePath(role));
+    navigate(getRoleHomePath(role), { state: { justLoggedIn: true } });
   };
 
   return (

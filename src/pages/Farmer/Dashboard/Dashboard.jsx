@@ -135,7 +135,7 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-(--fe-bg) px-4 py-5 text-(--fe-text) sm:px-6 lg:px-8">
+    <div className="bg-(--fe-bg) px-4 pb-4 pt-5 text-(--fe-text) sm:px-4 lg:pr-7 lg:pl-8">
       <div className="mx-auto max-w-7xl space-y-5">
         <DashboardOverview
           showArrivalNotice={showArrivalNotice}

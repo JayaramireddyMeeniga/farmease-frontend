@@ -80,12 +80,13 @@ const HashScroller = () => {
 const Layout = ({ children }) => {
   const location = useLocation();
   const hideHeaderFooter = ["/", "/signup"].includes(location.pathname);
+  const removeFooterGap = location.pathname === "/dashboard";
 
   return (
     <div className="min-h-screen bg-(--fe-bg) text-(--fe-text)">
       <div className="flex min-h-screen min-w-0 flex-col">
         {!hideHeaderFooter && <Header />}
-        <main className={`flex-1 ${hideHeaderFooter ? "" : "pb-28 lg:pb-32"}`}>
+        <main className={`flex-1 ${hideHeaderFooter || removeFooterGap ? "" : "pb-28 lg:pb-32"}`}>
           {children}
         </main>
         {!hideHeaderFooter && <Sidebar />}

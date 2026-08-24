@@ -6,24 +6,26 @@
 
   --color-green-50: #f4f4f4;
 
-.ai-assistant-fab-hidden {
-  transform: translate3d(0, 10px, 0) scale(0.92);
-  opacity: 0;
-}
-
-.ai-assistant-fab-visible {
-  transform: translate3d(0, 0, 0) scale(1);
-  opacity: 1;
-  transition: transform 2s cubic-bezier(.16,.84,.44,1), opacity 400ms ease-in;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .ai-assistant-fab-visible,
   .ai-assistant-fab-hidden {
-    transition: none !important;
-    transform: none !important;
+    transform: translate3d(0, 10px, 0) scale(0.92);
+    opacity: 0;
   }
-}
+
+  .ai-assistant-fab-visible {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 1;
+    transition: transform 2s cubic-bezier(.16, .84, .44, 1), opacity 400ms ease-in;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+
+    .ai-assistant-fab-visible,
+    .ai-assistant-fab-hidden {
+      transition: none !important;
+      transform: none !important;
+    }
+  }
+
   --color-red-50: #fff0ed;
   --color-red-100: #ffd8d1;
   --color-red-500: #dc5a42;
@@ -158,10 +160,12 @@ a:focus-visible {
     transform: translate3d(0, 10px, 0) scale(0.88);
     opacity: 0;
   }
+
   60% {
     transform: translate3d(0, 0, 0) scale(1.02);
     opacity: 1;
   }
+
   100% {
     transform: translate3d(0, 0, 0) scale(1);
     opacity: 1;

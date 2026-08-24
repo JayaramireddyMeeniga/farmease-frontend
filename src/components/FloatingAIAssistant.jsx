@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { Bot, Sparkles } from "lucide-react";
 
 const FloatingAIAssistant = () => {
   const navigate = useNavigate();
@@ -19,13 +20,16 @@ const FloatingAIAssistant = () => {
     <button
       type="button"
       onClick={() => navigate("/ai-assistant")}
-      className={`ai-assistant-fab fixed right-6 bottom-4 z-50 flex shrink-0 items-center gap-3 rounded-full bg-green-700 p-2 text-white shadow-[0_18px_48px_rgba(34,115,65,0.28)] sm:p-4 ${visible ? "ai-assistant-fab-visible" : "ai-assistant-fab-hidden"
+      className={`ai-assistant-fab fixed right-6 bottom-4 z-50 flex shrink-0 items-center gap-3 ${visible ? "ai-assistant-fab-visible" : "ai-assistant-fab-hidden"
         }`}
       style={{ willChange: "transform, opacity" }}
       aria-label="Open FarmEase AI Assistant"
     >
-      <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#fffaf2] text-green-900 shadow-inner">
-        AI
+      <span className="relative inline-flex p-4 shrink-0 items-center justify-center rounded-full bg-[#fff8e8] text-[#1f6f4d] shadow-[inset_0_-8px_18px_rgba(216,155,37,0.18)] ring-1 ring-white/80">
+        <Bot className="h-8 w-8" />
+        <span className="absolute right-0 top-0 flex h-5 w-5 items-center justify-center rounded-full bg-[#f5c66a] text-[#17251e] ring-2 ring-[#17251e]">
+          <Sparkles className="h-3 w-3" />
+        </span>
       </span>
     </button>
   );

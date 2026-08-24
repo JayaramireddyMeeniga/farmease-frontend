@@ -87,7 +87,7 @@ const Layout = ({ children }) => {
     <div className="min-h-screen bg-(--fe-bg) text-(--fe-text)">
       <div className="flex min-h-screen min-w-0 flex-col">
         {!hideHeaderFooter && <Header />}
-        <main className={`flex-1 ${hideHeaderFooter || removeFooterGap ? "" : "pb-28 lg:pb-32"}`}>
+        <main className="flex-1">
           {children}
         </main>
         {!hideHeaderFooter && (

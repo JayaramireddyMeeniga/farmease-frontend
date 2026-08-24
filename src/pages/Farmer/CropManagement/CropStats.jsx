@@ -1,7 +1,7 @@
 import React from "react";
 
 const CropStatCard = ({ label, value }) => (
-  <div className="rounded-lg bg-white/12 p-3 ring-1 ring-white/15">
+  <div className="rounded-lg bg-white/12 px-3 py-2 ring-1 ring-white/15">
     <p className="text-sm text-green-50/80">{label}</p>
     <p className="mt-1 text-xl font-semibold">{value}</p>
   </div>

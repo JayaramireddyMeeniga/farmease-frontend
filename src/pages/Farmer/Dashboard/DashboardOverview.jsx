@@ -8,6 +8,7 @@ import {
   Sprout,
   TrendingUp,
 } from "lucide-react";
+import ModuleHeader from "../../../components/ui/ModuleHeader";
 import { financialSummary } from "./dashboardData";
 
 const dashboardMetrics = [
@@ -44,40 +45,14 @@ const DashboardOverview = ({ showArrivalNotice, onDismissArrivalNotice }) => (
       </section>
     )}
 
-    <section className="overflow-hidden rounded-lg bg-(--fe-primary-900) text-(--fe-surface) shadow-(--fe-shadow-md)">
-      <div className="grid gap-6 p-5 lg:grid-cols-[1.35fr_0.65fr] lg:p-7">
-        <div className="flex flex-col justify-between gap-6">
-          <div>
-            <p className="inline-flex rounded-full bg-(--fe-primary-800) px-3 py-1 text-xs font-extrabold uppercase tracking-wide text-(--fe-wheat)">
-              Farmer command center
-            </p>
-            <h1 className="mt-4 max-w-3xl text-3xl font-black leading-tight sm:text-4xl">
-              Dashboard
-            </h1>
-            <p className="mt-3 max-w-2xl text-sm font-medium leading-6 text-(--fe-primary-100)">
-              A focused workspace for today&apos;s farm decisions, field health,
-              market movement, orders, and AI-backed action notes.
-            </p>
-          </div>
-
-          <div className="flex flex-wrap gap-3">
-            <Link
-              to="/farmer/products"
-              className="inline-flex items-center gap-2 rounded-md bg-(--fe-wheat) px-4 py-2.5 text-sm font-extrabold text-(--fe-text) transition hover:-translate-y-0.5"
-            >
-              Manage Products
-              <ArrowRight size={16} />
-            </Link>
-            <Link
-              to="/farmer/analytics"
-              className="inline-flex items-center gap-2 rounded-md bg-(--fe-primary-800) px-4 py-2.5 text-sm font-extrabold text-(--fe-surface) ring-1 ring-(--fe-primary-500) transition hover:bg-(--fe-soil)"
-            >
-              Open Analytics
-              <BarChart3 size={16} />
-            </Link>
-          </div>
-        </div>
-
+    <ModuleHeader
+      title="Dashboard"
+      description="A focused workspace for today's farm decisions, field health, market movement, orders, and AI-backed action notes."
+      badge="Farmer command center"
+      badgeIcon={Sprout}
+      className="bg-(--fe-primary-900) shadow-(--fe-shadow-md)"
+      contentClassName="lg:items-stretch"
+      sideContent={
         <div className="rounded-lg border border-(--fe-primary-500) bg-(--fe-primary-800) p-4">
           <div className="flex items-center justify-between">
             <div>
@@ -93,8 +68,25 @@ const DashboardOverview = ({ showArrivalNotice, onDismissArrivalNotice }) => (
             publish fresh stock before the afternoon pickup window.
           </p>
         </div>
+      }
+    >
+      <div className="mt-6 flex flex-wrap gap-3">
+        <Link
+          to="/farmer/products"
+          className="inline-flex items-center gap-2 rounded-md bg-(--fe-wheat) px-4 py-2.5 text-sm font-extrabold text-(--fe-text) transition hover:-translate-y-0.5"
+        >
+          Manage Products
+          <ArrowRight size={16} />
+        </Link>
+        <Link
+          to="/farmer/analytics"
+          className="inline-flex items-center gap-2 rounded-md bg-(--fe-primary-800) px-4 py-2.5 text-sm font-extrabold text-(--fe-surface) ring-1 ring-(--fe-primary-500) transition hover:bg-(--fe-soil)"
+        >
+          Open Analytics
+          <BarChart3 size={16} />
+        </Link>
       </div>
-    </section>
+    </ModuleHeader>
 
     <section className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
       {dashboardMetrics.map((metric) => {

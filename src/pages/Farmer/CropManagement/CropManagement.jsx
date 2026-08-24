@@ -13,6 +13,7 @@ import {
   X,
 } from "lucide-react";
 import { toast } from "react-toast";
+import ModuleHeader from "../../../components/ui/ModuleHeader";
 import CropStats from "./CropStats";
 
 const statusConfig = {
@@ -149,45 +150,24 @@ const CropManagement = () => {
   return (
     <div className="min-h-screen py-4 text-slate-900 sm:px-6 lg:px-6">
       <section className="overflow-hidden rounded-lg border border-green-900/10 bg-white shadow-xl shadow-green-900/5">
-        <div className="bg-linear-to-r from-green-900 via-emerald-800 to-teal-700 p-5 text-white">
-          <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
-            <div className="w-full">
-              <div className="flex w-full items-center justify-between">
-                <div>
-                  <div className="flex items-center gap-3">
-                    <h1 className="text-2xl font-semibold leading-tight">
-                      Crop Management
-                    </h1>
-
-                    <div className="inline-flex items-center gap-2 rounded-full bg-white/12 px-3 py-1 text-sm font-medium text-green-50 ring-1 ring-white/20">
-                      <Leaf className="h-4 w-4" />
-                      Field planning dashboard
-                    </div>
-                  </div>
-
-                  <p className="mt-1 max-w-xl text-sm leading-6 text-green-50/90">
-                    Track crop stages, acreage, and field activity from one focused workspace.
-                  </p>
-                </div>
-
-                <button
-                  onClick={() => setIsDialogOpen(true)}
-                  className="inline-flex shrink-0 items-center justify-center gap-2 rounded-lg bg-white px-3 py-2 text-sm font-semibold text-green-800 shadow-lg shadow-green-950/20 transition hover:bg-green-50 focus:outline-none focus:ring-2 focus:ring-white/80"
-                >
-                  <Plus className="h-4 w-4" />
-                  Add Crop
-                </button>
-              </div>
-            </div>
-          </div>
-
+        <ModuleHeader
+          title="Crop Management"
+          description="Track crop stages, acreage, and field activity from one focused workspace."
+          badge="Field planning dashboard"
+          badgeIcon={Leaf}
+          action={{
+            label: "Add Crop",
+            onClick: () => setIsDialogOpen(true),
+          }}
+          actionIcon={Plus}
+        >
           <CropStats
             cropCount={crops.length}
             totalArea={totalArea}
             growingCount={statusCounts.Growing}
             harvestedCount={statusCounts.Harvested}
           />
-        </div>
+        </ModuleHeader>
 
         <div className="border-b border-slate-200 bg-white px-5 py-4">
           <div className="flex flex-col gap-3 xl:flex-row xl:items-center xl:justify-between">

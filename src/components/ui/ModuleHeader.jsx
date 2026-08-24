@@ -13,7 +13,7 @@ const ModuleHeader = ({
   contentClassName = "",
 }) => (
   <header
-    className={`overflow-hidden rounded-lg bg-linear-to-r from-green-900 via-emerald-800 to-teal-700 p-5 text-white ${className}`}
+    className={`overflow-hidden rounded-lg border border-[#d7e6df] bg-[#20453A] p-5 text-white shadow-[0_14px_36px_rgba(16,37,31,0.16)] ${className}`}
   >
     <div
       className={`flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between ${contentClassName}`}

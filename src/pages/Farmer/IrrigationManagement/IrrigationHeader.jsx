@@ -9,7 +9,6 @@ const IrrigationHeader = ({ stats, focusSchedules }) => {
       description="Plan crop watering cycles, track acreage, and keep every field on a clear schedule from one polished workspace."
       badge="Smart water planning"
       badgeIcon={Waves}
-      className="border border-[#d7e6df] shadow-[0_14px_36px_rgba(16,37,31,0.16)]"
       sideContent={
         <div className="rounded-lg border border-[#d3efe0]/20 bg-[#f7fbf6] p-3 text-[#17251e] shadow-[0_10px_26px_rgba(0,0,0,0.12)]">
           <div className="flex items-center gap-3">

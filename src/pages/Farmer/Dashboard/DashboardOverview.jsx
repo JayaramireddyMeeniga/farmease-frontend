@@ -50,7 +50,7 @@ const DashboardOverview = ({ showArrivalNotice, onDismissArrivalNotice }) => (
       description="A focused workspace for today's farm decisions, field health, market movement, orders, and AI-backed action notes."
       badge="Farmer command center"
       badgeIcon={Sprout}
-      className="bg-(--fe-primary-900) shadow-(--fe-shadow-md)"
+      className="shadow-(--fe-shadow-md)"
       contentClassName="lg:items-stretch"
       sideContent={
         <div className="rounded-lg border border-(--fe-primary-500) bg-(--fe-primary-800) p-4">

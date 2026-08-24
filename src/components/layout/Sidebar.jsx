@@ -146,9 +146,9 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="fixed inset-x-0 bottom-4 z-40 px-3 sm:px-5">
+    <div className="relative min-w-0 max-w-[calc(100vw-6rem)] shrink-0">
       {selectedGroup && activePanel && (
-        <div className="mx-auto mb-3 max-w-4xl overflow-hidden rounded-lg border border-white/70 bg-white/90 shadow-[0_30px_80px_rgba(38,50,37,0.22)] backdrop-blur-2xl">
+        <div className="absolute inset-x-0 bottom-[calc(100%+0.75rem)] mx-auto max-w-4xl overflow-hidden rounded-lg border border-white/70 bg-white/90 shadow-[0_30px_80px_rgba(38,50,37,0.22)] backdrop-blur-2xl">
           <div className="flex items-center justify-between gap-3 border-b border-[#e5efe2] bg-[#f8fbf5] px-4 py-3">
             <div className="flex min-w-0 items-center gap-3">
               <span className="flex p-2.5 shrink-0 items-center justify-center rounded-lg bg-[#2f7d5a] text-white shadow-[0_12px_24px_rgba(47,125,90,0.25)]">
@@ -191,7 +191,7 @@ const Sidebar = () => {
         </div>
       )}
 
-      <nav className="mx-auto flex max-w-5xl items-center gap-2 rounded-4xl border border-white/55 bg-[#14231c]/95 p-2 text-white shadow-[0_22px_60px_rgba(23,37,30,0.35)] backdrop-blur-2xl">
+      <nav className="flex w-max max-w-full items-center gap-2 rounded-4xl border border-white/55 bg-[#14231c]/95 p-2 text-white shadow-[0_22px_60px_rgba(23,37,30,0.35)] backdrop-blur-2xl">
         <Link
           to={roleHomePath}
           onClick={() => setActivePanel(null)}
@@ -206,7 +206,7 @@ const Sidebar = () => {
 
         <div className="h-8 w-px shrink-0 bg-white/15" />
 
-        <div className="flex min-w-0 flex-1 items-center gap-2 overflow-x-auto">
+        <div className="flex min-w-0 items-center gap-2 overflow-x-auto">
           {visibleNavGroups.map((group) => {
             const groupActive = activeGroup?.id === group.id;
             const panelOpen = activePanel === group.id;

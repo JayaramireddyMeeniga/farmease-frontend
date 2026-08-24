@@ -90,7 +90,13 @@ const Layout = ({ children }) => {
         <main className={`flex-1 ${hideHeaderFooter || removeFooterGap ? "" : "pb-28 lg:pb-32"}`}>
           {children}
         </main>
-        {!hideHeaderFooter && <Sidebar />}
+        {!hideHeaderFooter && (
+          <div className="fixed inset-x-0 bottom-4 z-40 px-3 sm:px-5">
+            <div className="mx-auto flex w-fit max-w-full items-end gap-3">
+              <Sidebar />
+            </div>
+          </div>
+        )}
         {!hideHeaderFooter && <FloatingAIAssistant />}
         {!hideHeaderFooter && <Footer />}
         <Toaster position="top-right" />

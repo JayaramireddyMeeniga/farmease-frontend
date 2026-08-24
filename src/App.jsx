@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import { useEffect } from "react";
+import { Toaster } from "react-hot-toast";
 import Home from "./pages/Home/Home";
 import Tips from "./pages/Farmer/Tips/Tips";
 import Dealers from "./pages/Farmer/Dealers/Dealers";
@@ -92,6 +93,7 @@ const Layout = ({ children }) => {
         {!hideHeaderFooter && <Sidebar />}
         {!hideHeaderFooter && <FloatingAIAssistant />}
         {!hideHeaderFooter && <Footer />}
+        <Toaster position="top-right" />
       </div>
     </div>
   );

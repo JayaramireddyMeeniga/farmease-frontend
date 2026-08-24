@@ -13,6 +13,7 @@ import {
   X,
 } from "lucide-react";
 import { toast } from "react-toast";
+import CropStats from "./CropStats";
 
 const statusConfig = {
   Growing: {
@@ -148,66 +149,59 @@ const CropManagement = () => {
   return (
     <div className="min-h-screen py-4 text-slate-900 sm:px-6 lg:px-6">
       <section className="overflow-hidden rounded-lg border border-green-900/10 bg-white shadow-xl shadow-green-900/5">
-        <div className="bg-gradient-to-r from-green-900 via-emerald-800 to-teal-700 px-5 py-6 text-white sm:px-7">
+        <div className="bg-linear-to-r from-green-900 via-emerald-800 to-teal-700 p-5 text-white">
           <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
-            <div className="max-w-2xl">
-              <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-white/12 px-3 py-1 text-sm font-medium text-green-50 ring-1 ring-white/20">
-                <Leaf className="h-4 w-4" />
-                Field planning dashboard
+            <div className="w-full">
+              <div className="flex w-full items-center justify-between">
+                <div>
+                  <div className="flex items-center gap-3">
+                    <h1 className="text-2xl font-semibold leading-tight">
+                      Crop Management
+                    </h1>
+
+                    <div className="inline-flex items-center gap-2 rounded-full bg-white/12 px-3 py-1 text-sm font-medium text-green-50 ring-1 ring-white/20">
+                      <Leaf className="h-4 w-4" />
+                      Field planning dashboard
+                    </div>
+                  </div>
+
+                  <p className="mt-1 max-w-xl text-sm leading-6 text-green-50/90">
+                    Track crop stages, acreage, and field activity from one focused workspace.
+                  </p>
+                </div>
+
+                <button
+                  onClick={() => setIsDialogOpen(true)}
+                  className="inline-flex shrink-0 items-center justify-center gap-2 rounded-lg bg-white px-3 py-2 text-sm font-semibold text-green-800 shadow-lg shadow-green-950/20 transition hover:bg-green-50 focus:outline-none focus:ring-2 focus:ring-white/80"
+                >
+                  <Plus className="h-4 w-4" />
+                  Add Crop
+                </button>
               </div>
-              <h1 className="text-3xl font-semibold leading-tight sm:text-4xl">
-                Crop Management
-              </h1>
-              <p className="mt-2 max-w-xl text-sm leading-6 text-green-50/90">
-                Track crop stages, acreage, and field activity from one focused
-                workspace.
-              </p>
-            </div>
-
-            <button
-              onClick={() => setIsDialogOpen(true)}
-              className="inline-flex h-11 items-center justify-center gap-2 rounded-lg bg-white px-4 text-sm font-semibold text-green-800 shadow-lg shadow-green-950/20 transition hover:bg-green-50 focus:outline-none focus:ring-2 focus:ring-white/80"
-            >
-              <Plus className="h-4 w-4" />
-              Add Crop
-            </button>
-          </div>
-
-          <div className="mt-6 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-            <div className="rounded-lg bg-white/12 p-4 ring-1 ring-white/15">
-              <p className="text-sm text-green-50/80">Total crops</p>
-              <p className="mt-1 text-2xl font-semibold">{crops.length}</p>
-            </div>
-            <div className="rounded-lg bg-white/12 p-4 ring-1 ring-white/15">
-              <p className="text-sm text-green-50/80">Cultivated area</p>
-              <p className="mt-1 text-2xl font-semibold">{totalArea} acres</p>
-            </div>
-            <div className="rounded-lg bg-white/12 p-4 ring-1 ring-white/15">
-              <p className="text-sm text-green-50/80">Growing now</p>
-              <p className="mt-1 text-2xl font-semibold">
-                {statusCounts.Growing}
-              </p>
-            </div>
-            <div className="rounded-lg bg-white/12 p-4 ring-1 ring-white/15">
-              <p className="text-sm text-green-50/80">Harvested</p>
-              <p className="mt-1 text-2xl font-semibold">
-                {statusCounts.Harvested}
-              </p>
             </div>
           </div>
+
+          <CropStats
+            cropCount={crops.length}
+            totalArea={totalArea}
+            growingCount={statusCounts.Growing}
+            harvestedCount={statusCounts.Harvested}
+          />
         </div>
 
         <div className="border-b border-slate-200 bg-white px-5 py-4">
           <div className="flex flex-col gap-3 xl:flex-row xl:items-center xl:justify-between">
-            <div className="relative w-full xl:max-w-md">
-              <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
-              <input
-                type="text"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                placeholder="Search crops"
-                className="h-11 w-full rounded-lg border border-slate-200 bg-slate-50 pl-10 pr-3 text-sm text-slate-800 outline-none transition focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-100"
-              />
+            <div className="w-full xl:max-w-md">
+              <div className="flex py-2 w-full items-center overflow-hidden rounded-md border border-slate-200 bg-slate-50 transition focus-within:border-green-500 focus-within:bg-white focus-within:ring-2 focus-within:ring-green-100">
+                <Search className="ml-3 h-4 w-4 shrink-0 text-slate-400" />
+                <input
+                  type="text"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  placeholder="Search crops"
+                  className="h-full min-w-0 flex-1 border-none bg-transparent px-3 text-sm text-slate-800 outline-none"
+                />
+              </div>
             </div>
 
             <div className="flex flex-wrap items-center gap-2">
@@ -220,11 +214,10 @@ const CropManagement = () => {
                   key={status}
                   type="button"
                   onClick={() => setFilterStatus(status)}
-                  className={`h-10 rounded-lg px-3 text-sm font-semibold transition ${
-                    filterStatus === status
-                      ? "bg-green-700 text-white shadow-md shadow-green-900/15"
-                      : "bg-slate-100 text-slate-600 hover:bg-slate-200"
-                  }`}
+                  className={`py-2 rounded-lg px-3 text-sm font-semibold transition ${filterStatus === status
+                    ? "bg-green-700 text-white shadow-md shadow-green-900/15"
+                    : "bg-slate-200 text-slate-600 hover:bg-slate-200"
+                    }`}
                 >
                   {status} ({statusCounts[status]})
                 </button>

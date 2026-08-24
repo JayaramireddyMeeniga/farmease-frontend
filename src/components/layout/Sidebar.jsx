@@ -180,7 +180,7 @@ const Sidebar = () => {
                 to={item.path}
                 onClick={() => setActivePanel(null)}
                 className={`rounded-lg px-4 py-3 text-sm font-semibold transition ${isActive(item.path)
-                  ? "bg-[#17251e] text-white shadow-[0_14px_28px_rgba(23,37,30,0.22)]"
+                  ? "bg-[#796654] text-white! shadow-[0_14px_28px_rgba(47,125,90,0.22)]"
                   : "bg-white text-[#2d3f33] ring-1 ring-[#e5efe2] hover:bg-[#edf5e9] hover:text-[#1f6f4d]"
                   }`}
               >

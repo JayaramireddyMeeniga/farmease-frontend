@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { clearAuthSession } from "../../authentication/authApi";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBell,
@@ -103,8 +104,7 @@ const Header = () => {
   }, [query, searchIndex]);
 
   const handleLogout = () => {
-    localStorage.removeItem("isLoggedIn");
-    localStorage.removeItem("activeRole");
+    clearAuthSession();
     navigate("/");
   };
 

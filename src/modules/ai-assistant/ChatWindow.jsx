@@ -46,8 +46,8 @@ const ChatWindow = () => {
   };
 
   return (
-    <div className="mx-auto flex flex-col gap-6 px-4 py-6 px-6">
-      <section className="rounded-xl border border-slate-200 bg-[radial-gradient(circle_at_top,_rgba(72,187,120,0.08),_transparent_42%)] p-6 shadow-[0_20px_50px_rgba(15,23,42,0.08)]">
+    <div className="mx-auto flex flex-col gap-6 px-4 py-6">
+      <section className="rounded-xl border border-slate-200 bg-[radial-gradient(circle_at_top,rgba(72,187,120,0.08),transparent_42%)] p-6 shadow-[0_20px_50px_rgba(15,23,42,0.08)]">
         <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <p className="text-sm uppercase tracking-[0.24em] text-green-900/80">FarmEase AI Assistant</p>
@@ -58,13 +58,13 @@ const ChatWindow = () => {
               Use the AI gateway to fetch products, book transport, search warehouses, hire workers, and view analytics without leaving this chat.
             </p>
           </div>
-          <div className="w-full min-w-[240px] sm:w-auto">
+          <div className="w-full min-w-60 sm:w-auto">
             <VoiceInput onActivate={handleVoiceActivate} />
           </div>
         </div>
 
         <div className="grid gap-6 xl:grid-cols-[1.6fr_0.9fr]">
-          <div className="rounded-[2rem] border border-slate-200 bg-white p-5 shadow-sm">
+          <div className="rounded-4xl border border-slate-200 bg-white p-5 shadow-sm">
             <div className="mb-4 flex items-center justify-between gap-3 border-b border-slate-100 pb-4">
               <div>
                 <h2 className="text-lg font-semibold text-slate-900">Chat</h2>

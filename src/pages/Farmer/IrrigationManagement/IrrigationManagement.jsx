@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from "react";
 import { CalendarClock, Droplets, Sprout } from "lucide-react";
 import IrrigationHeader from "./IrrigationHeader";
-import ScheduleForm from "./ScheduleForm";
+import ScheduleDialog from "./ScheduleDialog";
 import ScheduleList from "./ScheduleList";
 import { initialSchedules } from "./irrigationData";
 import { getAreaValue, getIntervalDays } from "./irrigationUtils";
@@ -22,6 +22,7 @@ const IrrigationManagement = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
   const [filterArea, setFilterArea] = useState("");
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   const areaOptions = useMemo(
     () =>
@@ -94,6 +95,16 @@ const IrrigationManagement = () => {
     setEditId(null);
   };
 
+  const closeDialog = () => {
+    resetForm();
+    setIsDialogOpen(false);
+  };
+
+  const openAddDialog = () => {
+    resetForm();
+    setIsDialogOpen(true);
+  };
+
   const updateFormField = (field, value) => {
     setNewSchedule((schedule) => ({ ...schedule, [field]: value }));
   };
@@ -101,7 +112,7 @@ const IrrigationManagement = () => {
   const addSchedule = () => {
     if (!newSchedule.crop || !newSchedule.area || !newSchedule.schedule) {
       alert("Please fill in all fields.");
-      return;
+      return false;
     }
 
     if (editId) {
@@ -124,6 +135,8 @@ const IrrigationManagement = () => {
 
     resetForm();
     setCurrentPage(1);
+    setIsDialogOpen(false);
+    return true;
   };
 
   const editSchedule = (schedule) => {
@@ -133,6 +146,7 @@ const IrrigationManagement = () => {
       schedule: schedule.schedule,
     });
     setEditId(schedule.id);
+    setIsDialogOpen(true);
   };
 
   const deleteSchedule = (id) => {
@@ -154,22 +168,14 @@ const IrrigationManagement = () => {
   };
 
   return (
-    <section className="min-h-screen bg-[#eef5f7] px-4 py-5 text-[#17251e] sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-7xl space-y-6">
+    <section className="min-h-screen bg-[#eef5f7] px-4 py-4 text-[#17251e] sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl space-y-5">
         <IrrigationHeader
           focusSchedules={irrigationSchedules.slice(0, 3)}
           stats={stats}
         />
 
-        <div className="grid gap-6 xl:grid-cols-[0.78fr_1.22fr]">
-          <ScheduleForm
-            editId={editId}
-            newSchedule={newSchedule}
-            onCancel={resetForm}
-            onChange={updateFormField}
-            onSubmit={addSchedule}
-          />
-
+        <div>
           <ScheduleList
             areaOptions={areaOptions}
             currentPage={safePage}
@@ -179,6 +185,7 @@ const IrrigationManagement = () => {
             onDelete={deleteSchedule}
             onEdit={editSchedule}
             onFilterChange={updateFilter}
+            onOpenAdd={openAddDialog}
             onPageChange={setCurrentPage}
             onSearchChange={updateSearch}
             searchQuery={searchQuery}
@@ -186,6 +193,15 @@ const IrrigationManagement = () => {
           />
         </div>
       </div>
+
+      <ScheduleDialog
+        editId={editId}
+        isOpen={isDialogOpen}
+        newSchedule={newSchedule}
+        onCancel={closeDialog}
+        onChange={updateFormField}
+        onSubmit={addSchedule}
+      />
     </section>
   );
 };

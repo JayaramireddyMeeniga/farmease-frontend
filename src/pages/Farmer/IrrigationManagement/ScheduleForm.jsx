@@ -6,24 +6,35 @@ const ScheduleForm = ({
   onChange,
   onSubmit,
   onCancel,
+  variant = "card",
 }) => {
-  return (
-    <section className="rounded-lg border border-[#dbe9de] bg-white p-5 shadow-[0_18px_50px_rgba(46,70,54,0.10)] sm:p-6">
-      <div className="flex items-center gap-3">
-        <span className="flex h-12 w-12 items-center justify-center rounded-lg bg-[#e8f6ec] text-[#227341]">
-          {editId ? <Edit3 size={23} /> : <Plus size={24} />}
-        </span>
-        <div>
-          <h2 className="text-xl font-bold text-[#17251e]">
-            {editId ? "Edit Schedule" : "Add Schedule"}
-          </h2>
-          <p className="text-sm font-medium text-[#69786d]">
-            Keep crop, area, and watering rhythm precise.
-          </p>
-        </div>
-      </div>
+  const isDialog = variant === "dialog";
 
-      <div className="mt-6 space-y-4">
+  return (
+    <section
+      className={
+        isDialog
+          ? "bg-white"
+          : "rounded-lg border border-[#dbe9de] bg-white p-5 shadow-[0_18px_50px_rgba(46,70,54,0.10)] sm:p-6"
+      }
+    >
+      {!isDialog && (
+        <div className="flex items-center gap-3">
+          <span className="flex h-12 w-12 items-center justify-center rounded-lg bg-[#e8f6ec] text-[#227341]">
+            {editId ? <Edit3 size={23} /> : <Plus size={24} />}
+          </span>
+          <div>
+            <h2 className="text-xl font-bold text-[#17251e]">
+              {editId ? "Edit Schedule" : "Add Schedule"}
+            </h2>
+            <p className="text-sm font-medium text-[#69786d]">
+              Keep crop, area, and watering rhythm precise.
+            </p>
+          </div>
+        </div>
+      )}
+
+      <div className={`${isDialog ? "space-y-4" : "mt-6 space-y-4"}`}>
         <label className="block">
           <span className="text-xs font-bold uppercase text-[#506057]">
             Crop

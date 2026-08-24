@@ -1,4 +1,4 @@
-import { Droplets, Edit3, Filter, Leaf, Search, Trash2 } from "lucide-react";
+import { Droplets, Edit3, Filter, Leaf, Plus, Search, Trash2 } from "lucide-react";
 import { getScheduleTone } from "./irrigationUtils";
 
 const ScheduleList = ({
@@ -9,6 +9,7 @@ const ScheduleList = ({
   filterArea,
   onDelete,
   onEdit,
+  onOpenAdd,
   onFilterChange,
   onPageChange,
   onSearchChange,
@@ -28,7 +29,7 @@ const ScheduleList = ({
             </p>
           </div>
 
-          <div className="grid gap-3 sm:grid-cols-[minmax(0,1fr)_12rem] lg:w-124">
+          <div className="grid gap-3 sm:grid-cols-[minmax(0,1fr)_12rem_auto] lg:w-[44rem]">
             <label className="relative block">
               <Search
                 size={18}
@@ -61,6 +62,15 @@ const ScheduleList = ({
                 ))}
               </select>
             </label>
+
+            <button
+              type="button"
+              onClick={onOpenAdd}
+              className="inline-flex h-11 items-center justify-center gap-2 rounded-lg bg-[#227341] px-4 text-sm font-bold text-white shadow-[0_12px_24px_rgba(34,115,65,0.22)] transition hover:-translate-y-0.5 hover:bg-[#1b5f35]"
+            >
+              <Plus size={17} />
+              Add
+            </button>
           </div>
         </div>
       </div>

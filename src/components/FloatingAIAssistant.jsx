@@ -19,9 +19,9 @@ const FloatingAIAssistant = () => {
     <button
       type="button"
       onClick={() => navigate("/ai-assistant")}
-      className={`ai-assistant-fab fixed right-6 z-50 flex items-center gap-3 rounded-full bg-green-800 px-4 py-3 text-white shadow-[0_18px_48px_rgba(34,115,65,0.28)] ${visible ? "ai-assistant-fab-visible" : "ai-assistant-fab-hidden"
+      className={`ai-assistant-fab fixed right-6 z-50 flex items-center gap-3 rounded-full bg-green-800 p-4 text-white shadow-[0_18px_48px_rgba(34,115,65,0.28)] ${visible ? "ai-assistant-fab-visible" : "ai-assistant-fab-hidden"
         }`}
-      style={{ top: "1.5rem", willChange: "transform, opacity" }}
+      style={{ top: "2.5rem", willChange: "transform, opacity" }}
       aria-label="Open FarmEase AI Assistant"
     >
       <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-[#fffaf2] text-green-900 shadow-inner">

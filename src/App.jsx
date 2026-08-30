@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from "react-router-dom";
 import { useEffect } from "react";
 import { Toaster } from "react-hot-toast";
 import Home from "./pages/Home/Home";
@@ -20,7 +20,7 @@ import IrrigationManagement from "./pages/Farmer/IrrigationManagement/Irrigation
 import TankMotorControl from "./pages/Farmer/TankMotorControl/TankMotorControl";
 import CropRotationPlanner from "./pages/Farmer/CropRotation/CropRotation";
 import Sidebar from "./components/layout/Sidebar";
-import FarmerLogin from "./pages/Farmer/AgriculturalJob/AgriculturalJob";
+import AgriWorkforce from "./pages/Farmer/AgriculturalJob/AgriculturalJob";
 import './index.css'
 import ProtectedRoute from "./utils/ProtectedRoute";
 import Delivery from "./pages/Farmer/Delivery/Delivery";
@@ -144,7 +144,8 @@ const App = () => {
                 <Route path="/delivery" element={<Delivery />} />
                 <Route path="/marketprice" element={<MarketPrice />} />
                 <Route path="/cropRotation" element={<CropRotationPlanner />} />
-                <Route path="/agricultureJob" element={<FarmerLogin />} />
+                <Route path="/agri-workforce" element={<AgriWorkforce />} />
+                <Route path="/agricultureJob" element={<Navigate to="/agri-workforce" replace />} />
                 <Route path="/farmer/products" element={<FarmerProducts />} />
                 <Route path="/farmer/orders" element={<FarmerOrders />} />
                 <Route path="/farmer/wallet" element={<FarmerWallet />} />

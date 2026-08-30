@@ -55,6 +55,11 @@ const searchablePages = [
     label: "Crop Rotation",
     keywords: "planner crop rotation soybean wheat rice corn soil",
   },
+  {
+    path: "/agri-workforce",
+    label: "Agri Workforce",
+    keywords: "agri workforce agriculture job laborers workers farm labor booking",
+  },
   { path: "/tips", label: "Tips", keywords: "agricultural tips farming guide" },
   {
     path: "/marketprice",

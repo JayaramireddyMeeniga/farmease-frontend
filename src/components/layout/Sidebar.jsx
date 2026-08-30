@@ -20,6 +20,7 @@ const navGroups = [
       { path: "/irrigation", label: "Irrigation" },
       { path: "/tankMotor", label: "Tank Motor" },
       { path: "/cropRotation", label: "Crop Rotation" },
+      { path: "/agri-workforce", label: "Agri Workforce" },
     ],
   },
   {
@@ -102,7 +103,7 @@ const navGroups = [
     roles: ["farmer"],
     items: [
       { path: "/communityForum", label: "Forum" },
-      { path: "/agricultureJob", label: "Jobs" },
+      { path: "/agri-workforce", label: "Agri Workforce" },
       { path: "/contact", label: "Contact" },
     ],
   },

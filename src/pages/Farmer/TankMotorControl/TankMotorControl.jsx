@@ -67,7 +67,7 @@ const TankMotorControl = () => {
               </div>
 
               <div className="mt-8 max-w-3xl">
-                <h1 className="text-4xl font-black tracking-normal text-stone-950 sm:text-5xl">
+                <h1 className="text-4xl font-semibold tracking-normal text-stone-950 sm:text-5xl">
                   Automatic Tank Motor OFF
                 </h1>
                 <p className="mt-4 max-w-2xl text-base leading-7 text-stone-600 sm:text-lg">
@@ -109,8 +109,8 @@ const TankMotorControl = () => {
                 </div>
                 <div
                   className={`rounded-lg px-3 py-2 text-sm font-bold ${motorRunning
-                      ? "bg-emerald-400 text-stone-950"
-                      : "bg-red-400 text-stone-950"
+                    ? "bg-emerald-400 text-stone-950"
+                    : "bg-red-400 text-stone-950"
                     }`}
                 >
                   {motorRunning ? "ON" : "OFF"}
@@ -118,17 +118,17 @@ const TankMotorControl = () => {
               </div>
 
               <div className="mt-8 grid grid-cols-[120px_1fr] items-center gap-6 sm:grid-cols-[150px_1fr]">
-                <div className="relative h-64 rounded-[2rem] border-4 border-sky-200 bg-white/10 p-2">
+                <div className="relative h-64 rounded-4xl border-4 border-sky-200 bg-white/10 p-2">
                   <div className="absolute inset-x-8 -top-4 h-5 rounded-t-lg bg-sky-200" />
                   <div className="relative h-full overflow-hidden rounded-[1.45rem] bg-stone-900">
                     <div
-                      className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-sky-500 via-cyan-400 to-emerald-300 transition-all duration-500"
+                      className="absolute bottom-0 left-0 right-0 bg-linear-to-t from-sky-500 via-cyan-400 to-emerald-300 transition-all duration-500"
                       style={{ height: waterHeight }}
                     >
                       <Waves className="absolute left-1/2 top-3 h-8 w-8 -translate-x-1/2 text-white/80" />
                     </div>
                     <div className="absolute inset-0 flex items-center justify-center">
-                      <span className="rounded-lg bg-stone-950/70 px-3 py-2 text-3xl font-black">
+                      <span className="rounded-lg bg-stone-950/70 px-3 py-2 text-3xl font-semibold">
                         {tankLevel}%
                       </span>
                     </div>
@@ -156,8 +156,8 @@ const TankMotorControl = () => {
                       type="button"
                       onClick={toggleAutoMode}
                       className={`flex items-center justify-center gap-2 rounded-lg px-4 py-3 text-sm font-bold transition ${autoMode
-                          ? "bg-emerald-400 text-stone-950 hover:bg-emerald-300"
-                          : "bg-white/10 text-white hover:bg-white/15"
+                        ? "bg-emerald-400 text-stone-950 hover:bg-emerald-300"
+                        : "bg-white/10 text-white hover:bg-white/15"
                         }`}
                     >
                       <Gauge className="h-5 w-5" />
@@ -167,8 +167,8 @@ const TankMotorControl = () => {
                       type="button"
                       onClick={toggleMotor}
                       className={`flex items-center justify-center gap-2 rounded-lg px-4 py-3 text-sm font-bold transition ${motorRunning
-                          ? "bg-red-400 text-stone-950 hover:bg-red-300"
-                          : "bg-white text-stone-950 hover:bg-stone-100"
+                        ? "bg-red-400 text-stone-950 hover:bg-red-300"
+                        : "bg-white text-stone-950 hover:bg-stone-100"
                         }`}
                     >
                       <Power className="h-5 w-5" />

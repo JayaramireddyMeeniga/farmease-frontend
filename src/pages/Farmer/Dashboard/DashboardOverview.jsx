@@ -20,7 +20,7 @@ const dashboardMetrics = [
 
 const DashboardOverview = ({ showArrivalNotice, onDismissArrivalNotice }) => (
   <>
-    {showArrivalNotice && (
+    {/* {showArrivalNotice && (
       <section className="flex flex-col gap-3 rounded-3xl border border-(--fe-border) bg-(--fe-bg-soft) px-4 py-3 shadow-(--fe-shadow-sm) sm:flex-row sm:items-center sm:justify-between">
         <div className="flex items-center gap-3">
           <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-(--fe-primary-600) text-(--fe-surface)">
@@ -43,9 +43,9 @@ const DashboardOverview = ({ showArrivalNotice, onDismissArrivalNotice }) => (
           Got it
         </button>
       </section>
-    )}
+    )} */}
 
-    <ModuleHeader
+    {/* <ModuleHeader
       title="Dashboard"
       description="A focused workspace for today's farm decisions, field health, market movement, orders, and AI-backed action notes."
       badge="Farmer command center"
@@ -53,13 +53,13 @@ const DashboardOverview = ({ showArrivalNotice, onDismissArrivalNotice }) => (
       className="shadow-(--fe-shadow-md)"
       contentClassName="lg:items-stretch"
       sideContent={
-        <div className="rounded-lg border border-(--fe-primary-500) bg-(--fe-primary-800) p-4">
+        <div className="rounded-lg border border-(--fe-primary-500) bg-gray-800 p-4">
           <div className="flex items-center justify-between">
             <div>
               <p className="text-xs font-bold uppercase text-(--fe-primary-200)">
                 Priority action
               </p>
-              <p className="mt-1 text-lg font-black">Sell high-demand stock</p>
+              <p className="mt-1 text-lg font-semibold">Sell high-demand stock</p>
             </div>
             <Brain className="text-(--fe-wheat)" size={24} />
           </div>
@@ -86,7 +86,7 @@ const DashboardOverview = ({ showArrivalNotice, onDismissArrivalNotice }) => (
           <BarChart3 size={16} />
         </Link>
       </div>
-    </ModuleHeader>
+    </ModuleHeader> */}
 
     <section className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
       {dashboardMetrics.map((metric) => {
@@ -99,18 +99,18 @@ const DashboardOverview = ({ showArrivalNotice, onDismissArrivalNotice }) => (
           >
             <div className="flex items-start justify-between gap-3">
               <div>
-                <p className="text-xs font-extrabold uppercase text-(--fe-text-muted)">
+                <p className="text-xs font-extrabold uppercase text-(--fe-wheat)">
                   {metric.label}
                 </p>
-                <p className="mt-2 text-2xl font-black text-(--fe-text)">
+                <p className="mt-1 text-xl font-semibold text-(--fe-text)">
                   {metric.value}
                 </p>
-                <p className="mt-1 text-xs font-semibold text-(--fe-text-muted)">
+                <p className="mt-0.5 text-xs font-semibold text-(--fe-text-muted)">
                   {metric.detail}
                 </p>
               </div>
-              <span className="flex p-2.5 items-center justify-center rounded-md bg-(--fe-bg-soft) text-(--fe-primary-600)">
-                <Icon size={20} />
+              <span className="flex p-2.5 items-center justify-center rounded-sm bg-(--fe-bg-soft) text-(--fe-primary-600)">
+                <Icon size={18} />
               </span>
             </div>
           </article>

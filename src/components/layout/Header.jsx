@@ -131,7 +131,7 @@ const Header = () => {
           className="flex items-center gap-2.5 rounded-md px-1 py-1 transition hover:bg-white/70 sm:px-2"
           aria-label="Go to workspace home"
         >
-          <span className="flex px-3.5 py-3 shrink-0 items-center justify-center rounded-lg bg-[#17251e] text-sm font-black text-[#f5c66a] shadow-[0_14px_28px_rgba(23,37,30,0.24)]">
+          <span className="flex px-3.5 py-3 shrink-0 items-center justify-center rounded-lg bg-[#17251e] text-sm font-semibold text-[#f5c66a] shadow-[0_14px_28px_rgba(23,37,30,0.24)]">
             FE
           </span>
           <span className="hidden min-w-0 sm:block">
@@ -166,7 +166,7 @@ const Header = () => {
             className="relative flex h-10 w-10 items-center justify-center rounded-lg bg-white text-[#405146] shadow-sm ring-1 ring-[#dfebdc] transition hover:bg-[#edf5e9]"
             aria-label="Notifications"
           >
-            <FontAwesomeIcon icon={faBell} className="text-xs" />
+            <FontAwesomeIcon icon={faBell} className="text-sm" />
             <span className="absolute -right-1 -top-1 flex min-w-5 items-center justify-center rounded-full bg-[#e45448] px-1 py-1 text-[10px] font-bold leading-none text-white ring-2 ring-[#f8fbf5]">
               3
             </span>

@@ -135,8 +135,8 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="bg-(--fe-bg) px-4 pb-4 pt-5 text-(--fe-text) sm:px-4 lg:pr-7 lg:pl-8">
-      <div className="mx-auto max-w-7xl space-y-5">
+    <div className="bg-(--fe-bg) p-4 text-(--fe-text)">
+      <div className="mx-auto max-w-7xl space-y-2.5">
         <DashboardOverview
           showArrivalNotice={showArrivalNotice}
           onDismissArrivalNotice={() => setShowArrivalNotice(false)}

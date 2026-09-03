@@ -126,7 +126,7 @@ const Select = React.forwardRef(
           className={cn(
             "flex min-h-8 w-full items-center gap-3 rounded-md border bg-white px-3 py-1.5 text-left",
             "shadow-[0_10px_24px_rgba(82,55,32,0.08)] transition-all duration-200",
-            "hover:-translate-y-0.5 hover:border-gray-300 hover:shadow-[0_16px_32px_rgba(82,55,32,0.13)]",
+            "hover:border-gray-300",
             "focus-visible:border-gray-300 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-gray-300/30",
             error
               ? "border-red-500 bg-red-50/60 focus-visible:border-red-500 focus-visible:ring-red-500/20"

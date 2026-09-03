@@ -1,4 +1,4 @@
-import { Edit3, Plus } from "lucide-react";
+import { Edit, Plus } from "lucide-react";
 
 const ScheduleForm = ({
   editId,
@@ -21,7 +21,7 @@ const ScheduleForm = ({
       {!isDialog && (
         <div className="flex items-center gap-3">
           <span className="flex h-12 w-12 items-center justify-center rounded-lg bg-[#e8f6ec] text-[#227341]">
-            {editId ? <Edit3 size={23} /> : <Plus size={24} />}
+            {editId ? <Edit size={23} /> : <Plus size={24} />}
           </span>
           <div>
             <h2 className="text-xl font-bold text-[#17251e]">
@@ -80,7 +80,7 @@ const ScheduleForm = ({
             onClick={onSubmit}
             className={`inline-flex h-12 flex-1 items-center justify-center gap-2 rounded-lg px-5 text-sm font-bold text-white shadow-[0_14px_28px_rgba(34,115,65,0.22)] transition hover:-translate-y-0.5 focus-visible:ring-2 focus-visible:ring-[#f0c766] ${editId ? "bg-[#bd8a1f] hover:bg-[#a57617]" : "bg-[#227341] hover:bg-[#1b5f35]"}`}
           >
-            {editId ? <Edit3 size={17} /> : <Plus size={18} />}
+            {editId ? <Edit size={17} /> : <Plus size={18} />}
             {editId ? "Update Schedule" : "Add Schedule"}
           </button>
           {editId && (

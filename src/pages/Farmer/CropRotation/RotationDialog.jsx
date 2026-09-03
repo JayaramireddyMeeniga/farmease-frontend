@@ -1,4 +1,4 @@
-import { Edit3, Plus, X } from "lucide-react";
+import { Edit, Plus, X } from "lucide-react";
 
 const RotationDialog = ({
   editId,
@@ -16,7 +16,7 @@ const RotationDialog = ({
         <div className="flex items-center justify-between border-b border-[#e3eee5] bg-[#f7fbf6] px-5 py-4">
           <div className="flex items-center gap-3">
             <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#e8f6ec] text-[#227341]">
-              {editId ? <Edit3 size={18} /> : <Plus size={19} />}
+              {editId ? <Edit size={18} /> : <Plus size={19} />}
             </span>
             <div>
               <p className="text-lg font-bold text-[#17251e]">
@@ -70,7 +70,7 @@ const RotationDialog = ({
               onClick={onSubmit}
               className={`inline-flex h-12 flex-1 items-center justify-center gap-2 rounded-lg px-5 text-sm font-bold text-white shadow-[0_14px_28px_rgba(34,115,65,0.22)] transition hover:-translate-y-0.5 focus-visible:ring-2 focus-visible:ring-[#f0c766] ${editId ? "bg-[#bd8a1f] hover:bg-[#a57617]" : "bg-[#227341] hover:bg-[#1b5f35]"}`}
             >
-              {editId ? <Edit3 size={17} /> : <Plus size={18} />}
+              {editId ? <Edit size={17} /> : <Plus size={18} />}
               {editId ? "Update Rotation" : "Add Rotation"}
             </button>
             <button

@@ -1,4 +1,4 @@
-import { Droplets, Edit3, Filter, Leaf, Plus, Search, Trash2 } from "lucide-react";
+import { Droplets, Edit, Filter, Leaf, Plus, Search, Trash2 } from "lucide-react";
 import { getScheduleTone } from "./irrigationUtils";
 
 const ScheduleList = ({
@@ -29,7 +29,7 @@ const ScheduleList = ({
             </p>
           </div>
 
-          <div className="grid gap-3 sm:grid-cols-[minmax(0,1fr)_12rem_auto] lg:w-[44rem]">
+          <div className="grid gap-3 sm:grid-cols-[minmax(0,1fr)_12rem_auto] lg:w-176">
             <label className="relative block">
               <Search
                 size={18}
@@ -192,7 +192,7 @@ const ScheduleMobileCard = ({ schedule, onDelete, onEdit }) => {
           onClick={() => onEdit(schedule)}
           className="inline-flex h-10 flex-1 items-center justify-center gap-2 rounded-lg border border-[#ecd799] bg-[#fff8e6] text-sm font-bold text-[#9a6a0d] transition hover:bg-[#f0c766] hover:text-[#17251e]"
         >
-          <Edit3 size={16} />
+          <Edit size={16} />
           Edit
         </button>
         <button
@@ -218,7 +218,7 @@ const ScheduleActions = ({ schedule, onDelete, onEdit }) => {
         aria-label={`Edit ${schedule.crop} schedule`}
         title="Edit"
       >
-        <Edit3 size={16} />
+        <Edit size={16} />
       </button>
       <button
         type="button"

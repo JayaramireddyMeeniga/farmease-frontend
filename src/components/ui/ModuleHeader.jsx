@@ -13,7 +13,7 @@ const ModuleHeader = ({
   contentClassName = "",
 }) => (
   <header
-    className={`overflow-hidden rounded-lg border border-[#d7e6df] bg-[#285448] p-5 text-white shadow-[0_14px_36px_rgba(16,37,31,0.16)] ${className}`}
+    className={`overflow-hidden rounded-lg border border-[#d7e6df] bg-[#285448] p-4 text-white shadow-[0_14px_36px_rgba(16,37,31,0.16)] ${className}`}
   >
     <div
       className={`flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between ${contentClassName}`}
@@ -43,7 +43,7 @@ const ModuleHeader = ({
             <button
               type="button"
               onClick={action.onClick}
-              className="inline-flex shrink-0 items-center justify-center gap-2 rounded-lg bg-white px-3 py-2 text-sm font-semibold text-green-800 shadow-lg shadow-green-950/20 transition hover:bg-green-50 focus:outline-none focus:ring-2 focus:ring-white/80"
+              className="inline-flex shrink-0 items-center justify-center gap-2 rounded-sm bg-white px-2.5 py-1.5 text-sm font-semibold text-green-800 shadow-lg shadow-green-950/20 transition hover:bg-green-50 focus:outline-none focus:ring-2 focus:ring-white/80"
             >
               {ActionIcon && <ActionIcon className="h-4 w-4" />}
               {action.label}

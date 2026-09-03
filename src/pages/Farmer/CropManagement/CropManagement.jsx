@@ -1,16 +1,7 @@
 import React, { useMemo, useState } from "react";
 import {
-  CheckCircle2,
-  Clock3,
-  Edit2Icon,
-  Filter,
-  Leaf,
-  MapPinned,
-  Plus,
-  Search,
-  Sprout,
-  Trash2,
-  X,
+  CheckCircle2, Clock3, Edit, Filter, Leaf,
+  MapPinned, Plus, Search, Sprout, Trash2, X,
 } from "lucide-react";
 import { toast } from "react-toast";
 import ModuleHeader from "../../../components/ui/ModuleHeader";
@@ -31,9 +22,9 @@ const statusConfig = {
   },
   Planted: {
     icon: Clock3,
-    cardAccent: "border-sky-200 bg-sky-50/70 text-sky-700",
-    chip: "bg-sky-100 text-sky-700 ring-sky-200",
-    dot: "bg-sky-500",
+    cardAccent: "border-[#c96c4a]/30 bg-[#fff8f0] text-[#c96c4a]",
+    chip: "bg-[#fff8f0] text-[#c96c4a] ring-[#c96c4a]/30",
+    dot: "bg-[#c96c4a]",
   },
 };
 
@@ -162,11 +153,8 @@ const CropManagement = () => {
           actionIcon={Plus}
         >
           <CropStats
-            cropCount={crops.length}
-            totalArea={totalArea}
-            growingCount={statusCounts.Growing}
-            harvestedCount={statusCounts.Harvested}
-          />
+            cropCount={crops.length} totalArea={totalArea} growingCount={statusCounts.Growing}
+            harvestedCount={statusCounts.Harvested} />
         </ModuleHeader>
 
         <div className="border-b border-slate-200 bg-white px-5 py-4">
@@ -175,10 +163,8 @@ const CropManagement = () => {
               <div className="flex py-2 w-full items-center overflow-hidden rounded-md border border-slate-200 bg-slate-50 transition focus-within:border-green-500 focus-within:bg-white focus-within:ring-2 focus-within:ring-green-100">
                 <Search className="ml-3 h-4 w-4 shrink-0 text-slate-400" />
                 <input
-                  type="text"
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  placeholder="Search crops"
+                  type="text" value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)} placeholder="Search crops"
                   className="h-full min-w-0 flex-1 border-none bg-transparent px-3 text-sm text-slate-800 outline-none"
                 />
               </div>
@@ -191,9 +177,7 @@ const CropManagement = () => {
               </span>
               {filterOptions.map((status) => (
                 <button
-                  key={status}
-                  type="button"
-                  onClick={() => setFilterStatus(status)}
+                  key={status} type="button" onClick={() => setFilterStatus(status)}
                   className={`py-2 rounded-lg px-3 text-sm font-semibold transition ${filterStatus === status
                     ? "bg-green-700 text-white shadow-md shadow-green-900/15"
                     : "bg-slate-200 text-slate-600 hover:bg-slate-200"
@@ -206,9 +190,9 @@ const CropManagement = () => {
           </div>
         </div>
 
-        <div className="bg-slate-50/80 px-5 py-5">
+        <div className="bg-slate-50/80 p-4">
           {filteredCrops.length > 0 ? (
-            <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            <div className="grid grid-cols-1 gap-2.5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               {filteredCrops.map((crop) => {
                 const config = statusConfig[crop.status] || statusConfig.Growing;
                 const StatusIcon = config.icon;
@@ -219,37 +203,33 @@ const CropManagement = () => {
                     className="group rounded-lg border border-slate-200 bg-white p-4 shadow-sm transition hover:-translate-y-0.5 hover:border-green-200 hover:shadow-lg hover:shadow-green-900/10"
                   >
                     <div className="flex items-start justify-between gap-3">
-                      <div className="flex min-w-0 items-start gap-3">
-                        <div
-                          className={`flex p-3 shrink-0 items-center justify-center rounded-lg border ${config.cardAccent}`}
-                        >
-                          <StatusIcon className="h-5 w-5" />
+                      <div className="flex min-w-0 items-start gap-2.5">
+                        <div className={`flex p-2 shrink-0 items-center justify-center rounded-md border ${config.cardAccent}`}>
+                          <StatusIcon className="h-4 w-4" />
                         </div>
-                        <div className="min-w-0">
-                          <h2 className="truncate text-lg font-semibold text-slate-900">
+                        <div className="min-w-0 space-y-0.5">
+                          <h2 className="truncate text-md leading-tight font-semibold text-slate-900">
                             {crop.name}
                           </h2>
-                          <p className="mt-1 flex items-center gap-1.5 text-sm text-slate-500">
-                            <MapPinned className="h-4 w-4 text-slate-400" />
+                          <p className="flex items-center leading-tight text-sm text-slate-500">
+                            <MapPinned className="h-3.5 w-3.5 text-slate-400" />
                             {crop.area}
                           </p>
                         </div>
                       </div>
 
-                      <span
-                        className={`inline-flex shrink-0 items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold ring-1 ${config.chip}`}
-                      >
+                      <span className={`inline-flex shrink-0 items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold ring-1 ${config.chip}`}>
                         <span className={`h-1.5 w-1.5 rounded-full ${config.dot}`} />
                         {crop.status}
                       </span>
                     </div>
 
-                    <div className="mt-4 grid grid-cols-2 gap-3 border-t border-slate-100 pt-4">
+                    <div className="mt-2 grid grid-cols-2 gap-3 border-t border-slate-200 pt-2">
                       <div>
                         <p className="text-xs font-medium uppercase tracking-wide text-slate-400">
                           Area
                         </p>
-                        <p className="mt-1 text-sm font-semibold text-slate-800">
+                        <p className="mt-0.5 text-sm font-semibold text-slate-800">
                           {crop.area}
                         </p>
                       </div>
@@ -257,24 +237,24 @@ const CropManagement = () => {
                         <p className="text-xs font-medium uppercase tracking-wide text-slate-400">
                           Stage
                         </p>
-                        <p className="mt-1 text-sm font-semibold text-slate-800">
+                        <p className="mt-0.5 text-sm font-semibold text-slate-800">
                           {crop.status}
                         </p>
                       </div>
                     </div>
 
-                    <div className="mt-3 flex justify-end gap-2">
+                    <div className="mt-2 flex justify-end gap-2">
                       <button
                         onClick={() => editCrop(crop)}
-                        className="flex h-9 w-9 items-center justify-center rounded-lg bg-amber-50 text-amber-600 transition hover:bg-amber-100 focus:outline-none focus:ring-2 focus:ring-amber-200"
+                        className="flex p-2.5 items-center justify-center rounded-md bg-amber-50 text-amber-600 transition hover:bg-amber-100 focus:outline-none focus:ring-2 focus:ring-amber-200"
                         title="Edit crop"
                         aria-label={`Edit ${crop.name}`}
                       >
-                        <Edit2Icon className="h-4 w-4" />
+                        <Edit className="h-4 w-4" />
                       </button>
                       <button
                         onClick={() => deleteCrop(crop.id)}
-                        className="flex h-9 w-9 items-center justify-center rounded-lg bg-rose-50 text-rose-600 transition hover:bg-rose-100 focus:outline-none focus:ring-2 focus:ring-rose-200"
+                        className="flex p-2.5 items-center justify-center rounded-md bg-rose-50 text-rose-600 transition hover:bg-rose-100 focus:outline-none focus:ring-2 focus:ring-rose-200"
                         title="Delete crop"
                         aria-label={`Delete ${crop.name}`}
                       >

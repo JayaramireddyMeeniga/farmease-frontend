@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap");
 @import "tailwindcss";
 
 :root {
@@ -14,11 +14,12 @@
   .ai-assistant-fab-visible {
     transform: translate3d(0, 0, 0) scale(1);
     opacity: 1;
-    transition: transform 2s cubic-bezier(.16, .84, .44, 1), opacity 400ms ease-in;
+    transition:
+      transform 2s cubic-bezier(0.16, 0.84, 0.44, 1),
+      opacity 400ms ease-in;
   }
 
   @media (prefers-reduced-motion: reduce) {
-
     .ai-assistant-fab-visible,
     .ai-assistant-fab-hidden {
       transition: none !important;
@@ -70,7 +71,7 @@
   --fe-accent-soil: var(--fe-soil);
   --fe-danger: #bd412d;
 
-  --fe-bg: #f3f7f1;
+  --fe-bg: #f5efe8;
   --fe-bg-soft: #eef5eb;
   --fe-surface: #ffffff;
   --fe-surface-muted: #f8fbf5;
@@ -96,8 +97,16 @@ body {
   min-height: 100%;
   margin: 0;
   background:
-    radial-gradient(circle at top left, rgba(245, 198, 106, 0.16), transparent 28rem),
-    radial-gradient(circle at top right, rgba(47, 125, 90, 0.12), transparent 30rem),
+    radial-gradient(
+      circle at top left,
+      rgba(245, 198, 106, 0.16),
+      transparent 28rem
+    ),
+    radial-gradient(
+      circle at top right,
+      rgba(47, 125, 90, 0.12),
+      transparent 30rem
+    ),
     linear-gradient(135deg, #f8fbf5 0%, var(--fe-bg) 48%, #edf5e9 100%);
   color: var(--fe-text);
   font-family: var(--font-sans);

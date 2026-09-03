@@ -1,4 +1,4 @@
-import { Edit3, Plus, Sprout, Trash2 } from "lucide-react";
+import { Edit, Plus, Sprout, Trash2 } from "lucide-react";
 import { getCropTone } from "./cropRotationUtils";
 
 const RotationBoard = ({ rotations, onAdd, onDelete, onEdit }) => {
@@ -67,7 +67,7 @@ const RotationCard = ({ index, rotation, onDelete, onEdit }) => {
             aria-label={`Edit ${rotation.year}`}
             title="Edit"
           >
-            <Edit3 size={16} />
+            <Edit size={16} />
           </button>
           <button
             type="button"

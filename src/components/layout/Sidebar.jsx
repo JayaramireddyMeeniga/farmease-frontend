@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -120,6 +120,8 @@ const Sidebar = () => {
   const roleHomePath = getRoleHomePath(userRole);
   const roleLabel = ROLE_LABELS[userRole] || "Farmer";
   const [activePanel, setActivePanel] = useState(null);
+  const [isScrolling, setIsScrolling] = useState(false);
+  const scrollTimeoutRef = useRef(null);
 
   const visibleNavGroups = useMemo(
     () => navGroups.filter((group) => group.roles.includes(userRole)),
@@ -146,8 +148,38 @@ const Sidebar = () => {
     setActivePanel((current) => (current === groupId ? null : groupId));
   };
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolling(true);
+      setActivePanel(null);
+
+      if (scrollTimeoutRef.current) {
+        window.clearTimeout(scrollTimeoutRef.current);
+      }
+
+      scrollTimeoutRef.current = window.setTimeout(() => {
+        setIsScrolling(false);
+      }, 180);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+
+      if (scrollTimeoutRef.current) {
+        window.clearTimeout(scrollTimeoutRef.current);
+      }
+    };
+  }, []);
+
   return (
-    <div className="relative min-w-0 max-w-[calc(100vw-6rem)] shrink-0">
+    <div
+      className={`relative min-w-0 max-w-[calc(100vw-6rem)] shrink-0 transition-all duration-300 ease-out motion-reduce:transition-none ${isScrolling
+        ? "pointer-events-none translate-y-[calc(100%+2rem)] opacity-0"
+        : "translate-y-0 opacity-100"
+        }`}
+    >
       {selectedGroup && activePanel && (
         <div className="absolute inset-x-0 bottom-[calc(100%+0.75rem)] mx-auto max-w-4xl overflow-hidden rounded-lg border border-white/70 bg-white/90 shadow-[0_30px_80px_rgba(38,50,37,0.22)] backdrop-blur-2xl">
           <div className="flex items-center justify-between gap-3 border-b border-[#e5efe2] bg-[#f8fbf5] px-4 py-3">
@@ -192,7 +224,7 @@ const Sidebar = () => {
         </div>
       )}
 
-      <nav className="flex w-max max-w-full items-center gap-2 rounded-4xl border border-white/55 bg-[#14231c]/95 p-2 text-white shadow-[0_22px_60px_rgba(23,37,30,0.35)] backdrop-blur-2xl">
+      <nav className="flex w-max max-w-full items-center gap-2 rounded-4xl border border-white/55 bg-[#14231c]/40 p-2 text-white shadow-[0_22px_60px_rgba(23,37,30,0.35)] backdrop-blur-2xl">
         <Link
           to={roleHomePath}
           onClick={() => setActivePanel(null)}

@@ -1,21 +1,17 @@
 import { Droplets, Edit, Filter, Leaf, Plus, Search, Trash2 } from "lucide-react";
+import { Select } from "../../../components/ui/select";
+import SchedulePagination from "./SchedulePagination";
 import { getScheduleTone } from "./irrigationUtils";
 
 const ScheduleList = ({
-  areaOptions,
-  currentPage,
-  currentSchedules,
-  filteredCount,
-  filterArea,
-  onDelete,
-  onEdit,
-  onOpenAdd,
-  onFilterChange,
-  onPageChange,
-  onSearchChange,
-  searchQuery,
-  totalPages,
+  areaOptions, currentPage, currentSchedules, filteredCount, filterArea, onDelete,
+  onEdit, onOpenAdd, onFilterChange, onPageChange, onSearchChange, searchQuery, totalPages,
 }) => {
+  const areaFilterOptions = [
+    { value: "", label: "All areas" },
+    ...areaOptions.map((area) => ({ value: area, label: area })),
+  ];
+
   return (
     <section className="rounded-lg border border-[#dbe9de] bg-white shadow-[0_18px_50px_rgba(46,70,54,0.10)]">
       <div className="border-b border-[#e3eee5] p-5 sm:p-6">
@@ -35,37 +31,26 @@ const ScheduleList = ({
                 size={18}
                 className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-[#728178]"
               />
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(event) => onSearchChange(event.target.value)}
+              <input type="text" value={searchQuery} onChange={(event) => onSearchChange(event.target.value)}
                 className="h-11 w-full rounded-lg border border-[#d7e4da] bg-[#fbfdf9] pl-10 pr-3 text-sm font-semibold transition placeholder:text-[#8c9b91] hover:border-[#9dc8af] focus:border-[#2f8f4e]"
                 placeholder="Search crop"
               />
             </label>
 
             <label className="relative block">
-              <Filter
-                size={17}
-                className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-[#728178]"
+              <Filter size={17}
+                className="pointer-events-none absolute left-3 top-1/2 z-10 -translate-y-1/2 text-[#728178]"
               />
-              <select
+              <Select
                 value={filterArea}
                 onChange={(event) => onFilterChange(event.target.value)}
-                className="h-11 w-full appearance-none rounded-lg border border-[#d7e4da] bg-[#fbfdf9] pl-10 pr-3 text-sm font-bold text-[#25352c] transition hover:border-[#9dc8af] focus:border-[#2f8f4e]"
-              >
-                <option value="">All areas</option>
-                {areaOptions.map((area) => (
-                  <option key={area} value={area}>
-                    {area}
-                  </option>
-                ))}
-              </select>
+                options={areaFilterOptions}
+                aria-label="Filter schedules by area"
+                className="[&>button]:h-11 [&>button]:rounded-lg [&>button]:border-[#d7e4da] [&>button]:bg-[#fbfdf9] [&>button]:pl-10 [&>button]:pr-2 [&>button]:shadow-none [&>button:hover]:border-[#9dc8af] [&>button:focus-visible]:border-[#2f8f4e] [&_button>span:first-of-type_span]:font-bold [&_button>span:first-of-type_span]:text-[#25352c]"
+              />
             </label>
 
-            <button
-              type="button"
-              onClick={onOpenAdd}
+            <button type="button" onClick={onOpenAdd}
               className="inline-flex h-11 items-center justify-center gap-2 rounded-lg bg-[#227341] px-4 text-sm font-bold text-white shadow-[0_12px_24px_rgba(34,115,65,0.22)] transition hover:-translate-y-0.5 hover:bg-[#1b5f35]"
             >
               <Plus size={17} />
@@ -112,23 +97,13 @@ const ScheduleList = ({
 
       {currentSchedules.length === 0 && <EmptySchedules />}
 
-      <div className="flex flex-col gap-3 border-t border-[#e3eee5] px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
-        <p className="text-sm font-semibold text-[#69786d]">
-          Showing {currentSchedules.length} of {filteredCount}
-        </p>
-        <div className="flex flex-wrap gap-2">
-          {Array.from({ length: totalPages }, (_, i) => (
-            <button
-              key={i + 1}
-              type="button"
-              onClick={() => onPageChange(i + 1)}
-              className={`h-10 min-w-10 rounded-lg px-3 text-sm font-bold transition ${currentPage === i + 1 ? "bg-[#227341] text-white shadow-[0_10px_22px_rgba(34,115,65,0.22)]" : "border border-[#d7e4da] bg-white text-[#405146] hover:bg-[#edf5e9] hover:text-[#227341]"}`}
-            >
-              {i + 1}
-            </button>
-          ))}
-        </div>
-      </div>
+      <SchedulePagination
+        currentPage={currentPage}
+        currentSchedulesCount={currentSchedules.length}
+        filteredCount={filteredCount}
+        onPageChange={onPageChange}
+        totalPages={totalPages}
+      />
     </section>
   );
 };

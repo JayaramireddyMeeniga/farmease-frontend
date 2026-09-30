@@ -3,18 +3,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { clearAuthSession } from "../../authentication/authApi";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faBell,
-  faChevronDown,
-  faCloudSun,
-  faRightFromBracket,
-  faSeedling,
-  faUserCircle,
+  faBell, faChevronDown, faChevronUp, faCloudSun, faRightFromBracket, faSeedling, faUserCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import HeaderSearchInput from "../ui/HeaderSearchInput";
 import {
-  getRoleHomePath,
-  getStoredUserRole,
-  ROLE_LABELS,
+  getRoleHomePath, getStoredUserRole, ROLE_LABELS,
 } from "../../utils/roleUtils";
 
 const searchablePages = [
@@ -145,24 +138,18 @@ const Header = () => {
         </Link>
 
         <div className="order-3 col-span-3 w-full justify-self-center md:order-0 md:col-span-1 md:max-w-2xl">
-          <HeaderSearchInput
-            value={query}
-            onChange={setQuery}
-            onSubmit={handleSearchSubmit}
-          />
+          <HeaderSearchInput value={query} onChange={setQuery} onSubmit={handleSearchSubmit} />
         </div>
 
         <div className="flex items-center justify-end gap-2 sm:gap-3">
-          <Link
-            to="/weatherForeCast"
+          <Link to="/weatherForeCast"
             className="hidden h-10 items-center gap-2 rounded-lg bg-white px-3 text-sm font-bold text-[#2f7d5a] shadow-sm ring-1 ring-[#dfebdc] transition hover:bg-[#edf5e9] md:flex"
           >
             <FontAwesomeIcon icon={faCloudSun} className="text-sm" />
             Weather
           </Link>
 
-          <button
-            type="button"
+          <button type="button"
             className="relative flex h-10 w-10 items-center justify-center rounded-lg bg-white text-[#405146] shadow-sm ring-1 ring-[#dfebdc] transition hover:bg-[#edf5e9]"
             aria-label="Notifications"
           >
@@ -185,14 +172,12 @@ const Header = () => {
               <span className="flex h-8 w-8 items-center justify-center rounded-md bg-[#2f7d5a] text-white shadow-inner">
                 <FontAwesomeIcon icon={faUserCircle} className="text-xl" />
               </span>
-              <FontAwesomeIcon
-                icon={faChevronDown}
-                className="hidden text-xs text-(--fe-text-muted) sm:block"
-              />
+              {dropdownOpen ? <FontAwesomeIcon icon={faChevronDown} className="hidden text-xs text-(--fe-text-muted) sm:block" /> :
+                <FontAwesomeIcon icon={faChevronUp} className="hidden text-xs text-(--fe-text-muted) sm:block" />}
             </button>
 
             {dropdownOpen && (
-              <div className="absolute right-0 mt-3 w-64 overflow-hidden rounded-3xl border border-[#dfebdc] bg-white text-gray-800 shadow-[0_24px_60px_rgba(38,50,37,0.18)]">
+              <div className="absolute right-0 mt-2 w-64 overflow-hidden rounded-lg border border-[#dfebdc] bg-white text-gray-800 shadow-[0_24px_60px_rgba(38,50,37,0.18)]">
                 <div className="bg-[#f8fbf5] p-3">
                   <div className="flex items-center gap-3">
                     <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[#2f7d5a] text-white shadow-sm">

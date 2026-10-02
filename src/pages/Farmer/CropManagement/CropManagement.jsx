@@ -312,7 +312,7 @@ const CropManagement = () => {
                 <input
                   type="text"
                   name="name"
-                  placeholder="Wheat"
+                  placeholder="Enter your Crop Name"
                   value={newCrop.name}
                   onChange={handleInputChange}
                   className="mt-2 h-11 w-full rounded-lg border border-slate-200 bg-slate-50 px-3 text-sm text-slate-800 outline-none transition focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-100"
@@ -326,7 +326,7 @@ const CropManagement = () => {
                 <input
                   type="text"
                   name="area"
-                  placeholder="5 acres"
+                  placeholder="Enter your Area"
                   value={newCrop.area}
                   onChange={handleInputChange}
                   className="mt-2 h-11 w-full rounded-lg border border-slate-200 bg-slate-50 px-3 text-sm text-slate-800 outline-none transition focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-100"

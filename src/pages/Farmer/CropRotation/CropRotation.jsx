@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { toast } from "react-toast";
 import CropRotationHeader from "./CropRotationHeader";
 import RotationBoard from "./RotationBoard";
@@ -11,13 +11,29 @@ const emptyRotation = {
   crops: "",
 };
 
+const ROTATIONS_PER_PAGE = 1;
+
 const CropRotationPlanner = () => {
   const [rotations, setRotations] = useState(initialRotations);
   const [newRotation, setNewRotation] = useState(emptyRotation);
   const [editId, setEditId] = useState(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const summary = useMemo(() => getRotationSummary(rotations), [rotations]);
+  const totalPages = Math.max(
+    1,
+    Math.ceil(rotations.length / ROTATIONS_PER_PAGE),
+  );
+  const firstVisibleIndex = (currentPage - 1) * ROTATIONS_PER_PAGE;
+  const visibleRotations = rotations.slice(
+    firstVisibleIndex,
+    firstVisibleIndex + ROTATIONS_PER_PAGE,
+  );
+
+  useEffect(() => {
+    setCurrentPage((page) => Math.min(page, totalPages));
+  }, [totalPages]);
 
   const resetForm = () => {
     setNewRotation(emptyRotation);
@@ -68,6 +84,7 @@ const CropRotationPlanner = () => {
           crops,
         },
       ]);
+      setCurrentPage(Math.ceil((rotations.length + 1) / ROTATIONS_PER_PAGE));
     }
 
     closeDialog();
@@ -91,7 +108,12 @@ const CropRotationPlanner = () => {
         <CropRotationHeader summary={summary} />
 
         <RotationBoard
+          currentPage={currentPage}
+          firstVisibleIndex={firstVisibleIndex}
+          onPageChange={setCurrentPage}
           rotations={rotations}
+          totalPages={totalPages}
+          visibleRotations={visibleRotations}
           onAdd={openAddDialog}
           onDelete={deleteRotation}
           onEdit={editRotation}
